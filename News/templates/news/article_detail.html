@@ -1,0 +1,16 @@
+{% extends 'news/base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h1>{{ article.title }}</h1>
+  <p class="text-muted">{{ article.published_at|date:"F d, Y" }}</p>
+  
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="img-fluid mb-4">
+  {% endif %}
+  
+  <p>{{ article.content }}</p>
+  
+  <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to News</a>
+</div>
+{% endblock %}
+
