@@ -1,0 +1,45 @@
+{% extends 'news/base.html' %}
+{% block title %}Siyasi News — Latest{% endblock %}
+{% block content %}
+<div class="row g-3" style="min-height:70vh;">
+  <!-- Left: list -->
+  <aside class="col-lg-4">
+    <div class="panel glassy p-3">
+      <h5 class="mb-3">Latest News</h5>
+      <input id="news-search" class="form-control form-control-sm mb-3" placeholder="Search news...">
+      <ul class="list-group list-group-flush" id="news-list">
+        {% for article in articles %}
+          <li class="list-group-item list-group-item-action bg-transparent text-light border-secondary-subtle"
+              data-id="{{ article.pk }}">
+            <div class="d-flex align-items-start gap-2">
+              {% if article.image %}
+                <img src="{{ article.image.url }}" width="52" height="52" class="rounded object-fit-cover" loading="lazy" alt="{{ article.title }}">
+              {% endif %}
+              <div>
+                <div class="fw-semibold">{{ article.title }}</div>
+                <small class="text-secondary">{{ article.published_at|date:"M d, Y" }}</small>
+              </div>
+            </div>
+          </li>
+        {% empty %}
+          <li class="list-group-item bg-transparent text-light">No articles yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Right: selected article -->
+  <section class="col-lg-8">
+    <div class="panel glassy p-3" id="article-content">
+      {% include 'news/article_partial.html' with article=selected_article %}
+    </div>
+  </section>
+</div>
+
+<!-- In-content Ad (clearly separated) -->
+<div class="mt-4 text-center">
+  <div class="ad-slot small text-muted" role="region" aria-label="Advertisement">
+    <div class="ad-placeholder">Ad space</div>
+  </div>
+</div>
+{% endblock %}

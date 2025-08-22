@@ -1,0 +1,24 @@
+{% extends 'news/base.html' %}
+{% block title %}Gallery - Siyasi News{% endblock %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-gradient mb-4">📸 News Gallery</h2>
+  <div class="row">
+    {% for article in articles %}
+      <div class="col-md-3 mb-4">
+        <div class="card bg-dark text-light shadow-lg border-0">
+          {% if article.images %}
+            <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
+          {% endif %}
+          <div class="card-body">
+            <h6 class="card-title">{{ article.title|truncatechars:50 }}</h6>
+            <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No images uploaded yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

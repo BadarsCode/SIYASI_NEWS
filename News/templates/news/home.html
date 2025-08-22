@@ -1,4 +1,4 @@
-{% extends 'news/base.html' %}
+{% comment %} {% extends 'news/base.html' %}
 {% block content %}
 <div class="container mt-5">
   <h2 class="mb-4">Latest News</h2>
@@ -53,4 +53,65 @@
     margin: 0;
   }
 </style>
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+<!-- Navbar here -->
+
+<!-- 🔥 News Slider -->
+<div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for article in articles %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        {% if article.images %}
+          <img src="{{ article.images.url }}" class="d-block w-100" alt="{{ article.title }}">
+        {% endif %}
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>{{ article.title }}</h5>
+          <p>{{ article.content|truncatechars:120 }}</p>
+          <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read More</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+
+<div class="container my-5">
+  <h1 class="text-center text-gradient mb-4">Latest News</h1>
+  <div class="row">
+    {% for article in articles %}
+    <div class="col-md-6 mb-4">
+      <div class="card news-card shadow-lg h-100">
+        {% if article.images %}
+          <img src="{{ article.images.url }}" class="card-img-top news-img" alt="{{ article.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{% url 'article_detail' article.pk %}" class="stretched-link text-white">
+              {{ article.title }}
+            </a>
+          </h5>
+          <p class="text-muted small">{{ article.published_at|date:"F d, Y" }}</p>
+          <p class="card-text text-light">
+            {{ article.content|truncatewords:20 }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-light">No news articles available.</p>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

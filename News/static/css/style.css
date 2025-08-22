@@ -1,12 +1,12 @@
-body {
+/* body {
     background-color: #f8f9fa;
 }
 /* News/static/news/css/style.css */
-.single-feature {
+/*.single-feature {
   border: 2px solid #3498db; /* Blue border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  padding: 15px;
+ /* border-radius: 10px; /* Rounded corners */
+/*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  /*padding: 15px;
   transition: all 0.3s ease;
 }
 .single-feature:hover {
@@ -22,4 +22,195 @@ body {
 .single-feature .title .lnr {
   font-size: 24px;
   color: #3498db;
+} */
+
+
+
+:root{
+  --bg-start:#0b0b12;   /* near-black */
+  --bg-end:#3d1a6f;     /* deep purple */
+  --panel:#141426cc;    /* glassy card */
+  --text:#e9e9ee;
+  --muted:#a7a7bb;
+  --accent:#a66bff;     /* purple accent */
+  --border: #ffffff22;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; }
+body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); }
+
+.gradient-bg{
+  min-height:100vh;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
+}
+
+.glassy-nav{
+  background: linear-gradient(135deg, #00000088, #2b0a4788);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.glassy{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.panel .list-group-item{
+  border-color: var(--border) !important;
+}
+.panel .list-group-item.active,
+.panel .list-group-item:hover{
+  background: #a66bff22;
+}
+
+a, .link-light { color: var(--accent); }
+a:hover { color: #c5a2ff; }
+
+.ad-placeholder{
+  height: 90px;
+  border: 1px dashed #ffffff33;
+  border-radius: 12px;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--muted);
+}
+
+.cookie-banner{
+  position: fixed; left:0; right:0; bottom:0;
+  background: #000000cc; color: var(--text);
+  backdrop-filter: blur(6px);
+  padding: .75rem 0;
+  border-top: 1px solid var(--border);
+  z-index: 1055;
+}
+
+.visually-hidden-focusable:active, .visually-hidden-focusable:focus {
+  position: static !important;
+  width: auto; height: auto; margin: 0;
+  overflow: visible; clip: auto;
+}
+
+
+body {
+  background: linear-gradient(135deg, #1a001f, #2a0033, #3a004d);
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #b5179e, #7209b7, #560bad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.news-card {
+  background: rgba(30, 0, 40, 0.8);
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(181, 23, 158, 0.4);
+}
+
+.news-img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+
+.article-detail {
+  background: rgba(30, 0, 40, 0.85);
+  border-radius: 20px;
+}
+
+.detail-img {
+  border-radius: 15px;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.related-news {
+  background: rgba(40, 0, 60, 0.8);
+  border-radius: 15px;
+}
+
+.related-link {
+  display: flex;
+  align-items: center;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.related-link:hover {
+  color: #b5179e;
+}
+
+.related-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+  
+.btn-gradient {
+  background: linear-gradient(45deg, #b5179e, #7209b7);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.05);
+}
+
+.gradient-navbar {
+  background: linear-gradient(90deg, #3a0ca3, #7209b7, #b5179e);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #f72585, #7209b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-link {
+  color: #f1f1f1 !important;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #ff66c4 !important;
+}
+
+
+.carousel-item img {
+  height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.carousel-caption h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, purple, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, purple, black);
+  color: white;
+  border: none;
+}
+.btn-gradient:hover {
+  opacity: 0.85;
 }

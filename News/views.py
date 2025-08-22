@@ -1,13 +1,55 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
-# Create your views here.
-from django.shortcuts import render
+# # Create your views here.
+# from django.shortcuts import render
+# from .models import NewsArticle
+
+# def home(request):
+#     articles = NewsArticle.objects.all().order_by('-published_at')
+#     return render(request, 'news/home.html', {'articles': articles})
+
+# def article_detail(request, pk):
+#     article = get_object_or_404(NewsArticle, pk=pk)
+
+#     return render(request, 'news/article_detail.html', {'article': article})
+
+
+
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
 from .models import NewsArticle
 
-def home(request):
+def news_split_view(request):
     articles = NewsArticle.objects.all().order_by('-published_at')
-    return render(request, 'news/home.html', {'articles': articles})
+    selected_article = articles.first() if articles.exists() else None
+    return render(request, 'news/news_split_ajax.html', {
+        'articles': articles,
+        'selected_article': selected_article
+    })
+
+# def article_detail_ajax(request, pk):
+#     article = get_object_or_404(NewsArticle, pk=pk)
+#     html = render(request, 'news/article_partial.html', {'article': article}).content.decode('utf-8')
+#     return JsonResponse({'html': html})
+
+def gallery(request):
+    articles = NewsArticle.objects.exclude(images="").order_by('-published_at')
+    return render(request, 'news/gallery.html', {'articles': articles})
+
+# Static policy/info pages
+def privacy_view(request): return render(request, 'news/privacy.html')
+def terms_view(request): return render(request, 'news/terms.html')
+def about_view(request): return render(request, 'news/about.html')
+def contact_view(request): return render(request, 'news/contact.html')
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import NewsArticle
 
 def article_detail(request, pk):
     article = get_object_or_404(NewsArticle, pk=pk)
-    return render(request, 'news/article_detail.html', {'article': article})
+    articles = NewsArticle.objects.exclude(pk=pk).order_by('-published_at')[:10]  # show 10 related
+    return render(request, 'news/article_detail.html', {
+        'article': article,
+        'articles': articles
+    })
