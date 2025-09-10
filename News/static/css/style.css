@@ -27,14 +27,14 @@
 
 
 :root{
-  --bg-start:#0b0b12;   /* near-black */
-  --bg-end:#3d1a6f;     /* deep purple */
-  --panel:#141426cc;    /* glassy card */
-  --text:#e9e9ee;
-  --muted:#a7a7bb;
-  --accent:#a66bff;     /* purple accent */
-  --border: #ffffff22;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --bg-start:#0a0a0f;   /* deep black */
+  --bg-end:#1e3a8a;     /* blue */
+  --panel:#1e293b;      /* slate */
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --accent:#06b6d4;     /* cyan accent */
+  --border: #ffffff33;
+  --shadow: 0 10px 30px rgba(0,0,0,.4);
 }
 
 * { box-sizing: border-box; }
@@ -47,7 +47,7 @@ body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sa
 }
 
 .glassy-nav{
-  background: linear-gradient(135deg, #00000088, #2b0a4788);
+  background: linear-gradient(135deg, #00000088, #1e3a8a88);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--border);
 }
@@ -64,11 +64,11 @@ body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sa
 }
 .panel .list-group-item.active,
 .panel .list-group-item:hover{
-  background: #a66bff22;
+  background: #06b6d422;
 }
 
 a, .link-light { color: var(--accent); }
-a:hover { color: #c5a2ff; }
+a:hover { color: #67e8f9; }
 
 .ad-placeholder{
   height: 90px;
@@ -95,8 +95,8 @@ a:hover { color: #c5a2ff; }
 
 
 body {
-  background: linear-gradient(135deg, #1a001f, #2a0033, #3a004d);
-  color: #f0f0f0;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  color: var(--text);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
