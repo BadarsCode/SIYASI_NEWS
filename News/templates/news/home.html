@@ -28,7 +28,7 @@
 
   <div class="row">
     <!-- 🔥 Sidebar -->
-    <div class="col-lg-3">
+    <div class="col-md-2 d-none d-lg-block">
       <div class="sidebar-box">
         <h5 class="text-gradient">Categories</h5>
         <ul class="list-unstyled">
@@ -51,6 +51,7 @@
     
 
     <!-- 🔥 Posts Grid -->
+
     <div class="col-lg-9">
       <div class="row">
         {% for article in all_articles %}
@@ -70,7 +71,7 @@
           <p>No news yet.</p>
         {% endfor %}
       </div>
-    </div>
+    </div> 
   </div>
 </div>
 {% endblock %}
