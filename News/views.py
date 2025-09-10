@@ -20,12 +20,15 @@ from django.http import JsonResponse
 from .models import NewsArticle
 
 def news_split_view(request):
-    articles = NewsArticle.objects.all().order_by('-published_at')
-    selected_article = articles.first() if articles.exists() else None
-    return render(request, 'news/news_split_ajax.html', {
+    articles = NewsArticle.objects.order_by('-published_at')[:5]  # slider
+    top_articles = NewsArticle.objects.order_by('-published_at')[:5]  # sidebar top
+    all_articles = NewsArticle.objects.all().order_by('-published_at')
+    return render(request, 'news/home.html', {
         'articles': articles,
-        'selected_article': selected_article
+        'top_articles': top_articles,
+        'all_articles': all_articles
     })
+
 
 # def article_detail_ajax(request, pk):
 #     article = get_object_or_404(NewsArticle, pk=pk)
@@ -53,3 +56,5 @@ def article_detail(request, pk):
         'article': article,
         'articles': articles
     })
+
+

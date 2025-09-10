@@ -1,147 +1,76 @@
-{% comment %} {% extends 'news/base.html' %}
+{% extends 'news/base.html' %}
 {% block content %}
-<div class="container mt-5">
-  <h2 class="mb-4">Latest News</h2>
-  <div class="row">
-    {% for article in articles %}
-    <div class="col-lg-4 col-md-6 mb-4">
-      <a href="{% url 'article_detail' article.pk %}" class="single-feature-link">
-        <div class="single-feature mb-30">
-          <div class="title d-flex flex-row align-items-center mb-3">
-            <i class="fas fa-newspaper lnr"></i>
-            <h4 class="ml-2">{{ article.title }}</h4>
-          </div>
-          <p>{{ article.content|truncatechars:120 }}</p>
-          <small class="text-muted">{{ article.published_at|date:"F d, Y" }}</small>
-        </div>
-      </a>
-    </div>
-    {% empty %}
-    <p>No news articles available.</p>
-    {% endfor %}
-  </div>
-</div>
+<div class="container mt-4">
 
-<style>
-  /* Make the link cover the whole box */
-  .single-feature-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  .single-feature {
-    border: 2px solid #3498db;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    padding: 15px;
-    height: 100%;
-    background-color: #fff;
-  }
-  .single-feature:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  .single-feature .lnr {
-    font-size: 24px;
-    color: #3498db;
-  }
-  .single-feature h4 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
-  }
-</style>
-{% endblock %} {% endcomment %}
-
-
-{% block content %}
-<!-- Hero Section -->
-<section class="hero-section text-center py-5">
-  <div class="container">
-    <h1 class="display-4 text-gradient fw-bold">Welcome to Siyasi News</h1>
-    <p class="lead text-light mb-4">Stay informed with the latest political news and insights from around the world.</p>
-    <a href="#latest-news" class="btn btn-gradient btn-lg">Explore Latest News</a>
-  </div>
-</section>
-
-<!-- 🔥 Featured News Slider -->
-<div id="newsCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    {% for article in articles %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        {% if article.images %}
-          <img src="{{ article.images.url }}" class="d-block w-100 carousel-img" alt="{{ article.title }}">
-        {% else %}
-          <div class="carousel-placeholder d-flex align-items-center justify-content-center">
-            <h3 class="text-light">No Image Available</h3>
-          </div>
-        {% endif %}
-        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3">
-          <h5 class="carousel-title">{{ article.title }}</h5>
-          <p class="carousel-text">{{ article.content|truncatechars:150 }}</p>
-          <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read More</a>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-
-  <!-- Indicators -->
-  <div class="carousel-indicators">
-    {% for article in articles %}
-      <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Latest News Section -->
-<section id="latest-news" class="py-5">
-  <div class="container">
-    <h2 class="text-center text-gradient mb-5">Latest News</h2>
-    <div class="row g-4">
+  <!-- 🔥 Slider -->
+  <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
       {% for article in articles %}
-      <div class="col-lg-4 col-md-6">
-        <div class="card news-card shadow-lg h-100 border-0">
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
           {% if article.images %}
-            <img src="{{ article.images.url }}" class="card-img-top news-img" alt="{{ article.title }}">
-          {% else %}
-            <div class="card-img-top news-placeholder d-flex align-items-center justify-content-center">
-              <i class="fas fa-newspaper fa-3x text-muted"></i>
-            </div>
+            <img src="{{ article.images.url }}" class="d-block w-100 rounded" style="height:400px; object-fit:cover;" alt="{{ article.title }}">
           {% endif %}
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title text-white mb-2">
-              <a href="{% url 'article_detail' article.pk %}" class="stretched-link text-decoration-none text-white">
-                {{ article.title }}
-              </a>
-            </h5>
-            <p class="text-muted small mb-3">
-              <i class="fas fa-calendar-alt me-1"></i>{{ article.published_at|date:"M d, Y" }}
-            </p>
-            <p class="card-text text-light flex-grow-1">
-              {{ article.content|truncatewords:25 }}
-            </p>
-            <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-light btn-sm mt-auto">Read More</a>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+            <h5>{{ article.title }}</h5>
+            <p>{{ article.content|truncatechars:100 }}</p>
+            <a href="{% url 'article_detail' article.pk %}" class="btn btn-gradient btn-sm">Read More</a>
           </div>
         </div>
-      </div>
-      {% empty %}
-      <div class="col-12">
-        <p class="text-center text-light fs-4">No news articles available at the moment.</p>
-      </div>
       {% endfor %}
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
   </div>
-</section>
+
+  <div class="row">
+    <!-- 🔥 Sidebar -->
+    <div class="col-lg-3">
+      <div class="sidebar-box">
+        <h5 class="text-gradient">Categories</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-light">Politics</a></li>
+          <li><a href="#" class="text-light">Economy</a></li>
+          <li><a href="#" class="text-light">Sports</a></li>
+          <li><a href="#" class="text-light">Technology</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-box">
+        <h5 class="text-gradient">Top Posts</h5>
+        <ol class="ps-3">
+          {% for article in top_articles %}
+            <li><a href="{% url 'article_detail' article.pk %}" class="text-light">{{ article.title|truncatechars:40 }}</a></li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+
+    
+
+    <!-- 🔥 Posts Grid -->
+    <div class="col-lg-9">
+      <div class="row">
+        {% for article in all_articles %}
+          <div class="col-md-4 mb-4">
+            <div class="post-card">
+              {% if article.images %}
+                <img src="{{ article.images.url }}" alt="{{ article.title }}">
+              {% endif %}
+              <div class="p-3">
+                <h6>{{ article.title|truncatechars:50 }}</h6>
+                <p class="small">{{ article.content|truncatechars:100 }}</p>
+                <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read More</a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <p>No news yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
