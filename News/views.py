@@ -1,23 +1,11 @@
-# from django.shortcuts import render
-
-# # Create your views here.
-# from django.shortcuts import render
-# from .models import NewsArticle
-
-# def home(request):
-#     articles = NewsArticle.objects.all().order_by('-published_at')
-#     return render(request, 'news/home.html', {'articles': articles})
-
-# def article_detail(request, pk):
-#     article = get_object_or_404(NewsArticle, pk=pk)
-
-#     return render(request, 'news/article_detail.html', {'article': article})
-
-
-
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import NewsArticle
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 
 def news_split_view(request):
     articles = NewsArticle.objects.order_by('-published_at')[:5]  # slider
@@ -29,12 +17,6 @@ def news_split_view(request):
         'all_articles': all_articles
     })
 
-
-# def article_detail_ajax(request, pk):
-#     article = get_object_or_404(NewsArticle, pk=pk)
-#     html = render(request, 'news/article_partial.html', {'article': article}).content.decode('utf-8')
-#     return JsonResponse({'html': html})
-
 def gallery(request):
     articles = NewsArticle.objects.exclude(images="").order_by('-published_at')
     return render(request, 'news/gallery.html', {'articles': articles})
@@ -43,7 +25,26 @@ def gallery(request):
 def privacy_view(request): return render(request, 'news/privacy.html')
 def terms_view(request): return render(request, 'news/terms.html')
 def about_view(request): return render(request, 'news/about.html')
-def contact_view(request): return render(request, 'news/contact.html')
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        full_message = f"From: {name} < {email} >\n\n{message}"
+        try:
+            send_mail(
+                subject="Contact Form Submission",
+                message=full_message,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+
+            )
+            messages.success(request, "your message has been sent successfully!")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+        return redirect('contact')
+    return render(request, 'news/contact.html')
 
 
 from django.shortcuts import render, get_object_or_404
