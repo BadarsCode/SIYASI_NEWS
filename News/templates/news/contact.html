@@ -1,22 +1,26 @@
 {% extends 'news/base.html' %}
-{% block title %}Contact — Siyasi News{% endblock %}
 {% block content %}
-<h1 class="h4 mb-3">Contact Us</h1>
-<form method="post" class="glassy p-3 rounded">
-  {% csrf_token %}
-  <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input name="name" class="form-control" required>
+<div class="container py-5">
+  <div class="bg-dark text-light p-5 rounded shadow">
+    <h2 class="text-gradient">Contact Us</h2>
+    <p class="mt-3">We’d love to hear from you! Fill out the form below:</p>
+
+    <form method="post" action="#">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Message</label>
+        <textarea class="form-control" name="message" rows="5" placeholder="Write your message..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-gradient">Send Message</button>
+    </form>
   </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email" name="email" class="form-control" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Message</label>
-    <textarea name="message" rows="4" class="form-control" required></textarea>
-  </div>
-  <button class="btn btn-light">Send</button>
-</form>
-<p class="small text-secondary mt-2">We don’t use this form to collect sensitive personal data.</p>
+</div>
 {% endblock %}

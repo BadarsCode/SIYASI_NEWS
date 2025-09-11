@@ -357,3 +357,23 @@ body {
   width: 100%;
   border-radius: 6px;
 }
+
+
+/* Contact us form */
+
+.text-gradient {
+  background: linear-gradient(90deg, purple, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, purple, black);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+}
