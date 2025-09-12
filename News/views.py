@@ -5,7 +5,19 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
+from .serializers import NewsArticleSerializer
+
+
+
+class NewsArticleListAPI(generics.ListCreateAPIView):
+    queryset = NewsArticle.objects.all().order_by('-published_at')
+    serializer_class = NewsArticleSerializer
+
+class NewsArticleDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = NewsArticle.objects.all()
+    serializer_class = NewsArticleSerializer
+
 
 def news_split_view(request):
     articles = NewsArticle.objects.order_by('-published_at')[:5]  # slider

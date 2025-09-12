@@ -21,6 +21,13 @@ urlpatterns = [
     path('terms/', views.terms_view, name='terms'),
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
+
+
+
+    # API endpoints
+    path('api/articles/', views.NewsArticleListAPI.as_view(), name='api_articles'),
+    path('api/articles/<int:pk>/', views.NewsArticleDetailAPI.as_view(), name='api_article_detail'),
+
 ]
 
 if settings.DEBUG:
