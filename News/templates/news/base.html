@@ -66,6 +66,38 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href='#' role='button' data-bs-toggle ='dropdown'> Category</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'category' 'politics' %}">Politics</a>
+          <a class="dropdown-item" href="{% url 'category' 'economy' %}">Economy</a>
+          <a class="dropdown-item" href="{% url 'category' 'sports' %}">Sports</a>
+          <a class="dropdown-item" href="{% url 'category' 'technology' %}">Technology</a>
+          <a class="dropdown-item" href="{% url 'category' 'health' %}">Health</a>
+          <a class="dropdown-item" href="{% url 'category' 'entertainment' %}">Entertainment</a>
+          <a class="dropdown-item" href="{% url 'category' 'world' %}">World</a>
+          <a class="dropdown-item" href="{% url 'category' 'science' %}">Science</a>
+          <a class="dropdown-item" href="{% url 'category' 'lifestyle' %}">Lifestyle</a>
+          <a class="dropdown-item" href="{% url 'category' 'business' %}">Business</a>
+          <a class="dropdown-item" href="{% url 'category' 'environment' %}">Environment</a>
+          <a class="dropdown-item" href="{% url 'category' 'education' %}">Education</a>
+          <a class="dropdown-item" href="{% url 'category' 'travel' %}">Travel</a>
+          <a class="dropdown-item" href="{% url 'category' 'opinion' %}">Opinion</a>
+          <a class="dropdown-item" href="{% url 'category' 'culture' %}">Culture</a>
+          <a class="dropdown-item" href="{% url 'category' 'food' %}">Food</a>
+          <a class="dropdown-item" href="{% url 'category' 'fashion' %}">Fashion</a>
+          <a class="dropdown-item" href="{% url 'category' 'real-estate' %}">Real Estate</a>
+          <a class="dropdown-item" href="{% url 'category' 'automotive' %}">Automotive</a>
+          <a class="dropdown-item" href="{% url 'category' 'media' %}">Media</a>
+          <a class="dropdown-item" href="{% url 'category' 'religion' %}">Religion</a>
+          <a class="dropdown-item" href="{% url 'category' 'philosophy' %}">Philosophy</a>
+          <a class="dropdown-item" href="{% url 'category' 'history' %}">History</a>
+          <a class="dropdown-item" href="{% url 'category' 'agriculture' %}">Agriculture</a>
+          </div>
+
+          
+        
+        <li>
         <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
         <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
       </ul>

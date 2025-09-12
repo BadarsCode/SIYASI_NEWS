@@ -71,3 +71,8 @@ def article_detail(request, pk):
     })
 
 
+def CategoryView(request, category_name):
+    articles = NewsArticle.objects.filter(category=category_name).order_by('-published_at')
+    for i in articles:
+        print(i)
+    return render(request, 'news/category.html',  {'article': articles, 'category_name': category_name})
