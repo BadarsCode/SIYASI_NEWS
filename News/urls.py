@@ -14,13 +14,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.news_split_view, name='home'),
+    path('', views.Home, name='home'),
     path('article/<int:pk>/', views.article_detail, name='article_detail'),
     path('gallery/', views.gallery, name='gallery'),
     path('privacy/', views.privacy_view, name='privacy'),
     path('terms/', views.terms_view, name='terms'),
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
+
+    path('category/<str:category>/', views.category_view, name='category_view'),
 
 
 

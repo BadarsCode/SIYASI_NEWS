@@ -19,14 +19,18 @@ class NewsArticleDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NewsArticleSerializer
 
 
-def news_split_view(request):
+def Home(request):
     articles = NewsArticle.objects.order_by('-published_at')[:5]  # slider
-    top_articles = NewsArticle.objects.order_by('-published_at')[:5]  # sidebar top
+    top_articles = NewsArticle.objects.order_by('-published_at')[:5]
+    breaking_news= NewsArticle.objects.order_by('-published_at')[:5]  # sidebar top  # sidebar top
     all_articles = NewsArticle.objects.all().order_by('-published_at')
+    categories = [cat[0] for cat in NewsArticle.categories]
     return render(request, 'news/home.html', {
         'articles': articles,
         'top_articles': top_articles,
-        'all_articles': all_articles
+        'all_articles': all_articles,
+        'categories': categories,
+        'breaking_news': breaking_news
     })
 
 def gallery(request):
@@ -75,4 +79,7 @@ def CategoryView(request, category_name):
     articles = NewsArticle.objects.filter(category=category_name).order_by('-published_at')
     for i in articles:
         print(i)
-    return render(request, 'news/category.html',  {'article': articles, 'category_name': category_name})
+    return render(request, 'news/category.html',  {'article': articles, 'category': category_name})
+def category_view(request, category):
+    article = NewsArticle.objects.filter(category=category).order_by('-published_at')
+    return render(request, 'news/category.html', {'article': article, 'category': category})

@@ -349,3 +349,30 @@ body {
 .btn-gradient:hover {
   opacity: 0.9;
 }
+
+.text-gradient {
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Limit dropdown width */
+.category-dropdown {
+  width: 800px important;
+  max-width: 800px;
+  min-width: 800px;
+}
+
+/* Adjust items */
+.category-dropdown .dropdown-item {
+  padding: 6px 10px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.category-dropdown .dropdown-item:hover {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: #fff !important;
+  border-radius: 6px;
+}
+

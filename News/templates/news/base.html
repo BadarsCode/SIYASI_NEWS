@@ -9,11 +9,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <meta name="description" content="Siyasi News - Latest Politics, Sports, Tech and World News">
+  <meta name="keywords" content="Siyasi News, Politics, Sports, Technology, World, Breaking News">
+  <meta name="author" content="Siyasi News">
+  <meta property="og:title" content="Siyasi News">
+  <meta property="og:description" content="Get the latest breaking news on Politics, Sports, Technology, and more.">
+  <meta property="og:image" content="{% if articles and articles.0.images %}{{ articles.0.images.url }}{% endif %}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta name="twitter:card" content="summary_large_image">
 
   <style>
     body {
       background: #111;
-      color: #ddd;
+      color: #ffffffff;
       font-family: 'Segoe UI', sans-serif;
     }
     .navbar {
@@ -67,42 +75,41 @@
         <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href='#' role='button' data-bs-toggle ='dropdown'> Category</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'category' 'politics' %}">Politics</a>
-          <a class="dropdown-item" href="{% url 'category' 'economy' %}">Economy</a>
-          <a class="dropdown-item" href="{% url 'category' 'sports' %}">Sports</a>
-          <a class="dropdown-item" href="{% url 'category' 'technology' %}">Technology</a>
-          <a class="dropdown-item" href="{% url 'category' 'health' %}">Health</a>
-          <a class="dropdown-item" href="{% url 'category' 'entertainment' %}">Entertainment</a>
-          <a class="dropdown-item" href="{% url 'category' 'world' %}">World</a>
-          <a class="dropdown-item" href="{% url 'category' 'science' %}">Science</a>
-          <a class="dropdown-item" href="{% url 'category' 'lifestyle' %}">Lifestyle</a>
-          <a class="dropdown-item" href="{% url 'category' 'business' %}">Business</a>
-          <a class="dropdown-item" href="{% url 'category' 'environment' %}">Environment</a>
-          <a class="dropdown-item" href="{% url 'category' 'education' %}">Education</a>
-          <a class="dropdown-item" href="{% url 'category' 'travel' %}">Travel</a>
-          <a class="dropdown-item" href="{% url 'category' 'opinion' %}">Opinion</a>
-          <a class="dropdown-item" href="{% url 'category' 'culture' %}">Culture</a>
-          <a class="dropdown-item" href="{% url 'category' 'food' %}">Food</a>
-          <a class="dropdown-item" href="{% url 'category' 'fashion' %}">Fashion</a>
-          <a class="dropdown-item" href="{% url 'category' 'real-estate' %}">Real Estate</a>
-          <a class="dropdown-item" href="{% url 'category' 'automotive' %}">Automotive</a>
-          <a class="dropdown-item" href="{% url 'category' 'media' %}">Media</a>
-          <a class="dropdown-item" href="{% url 'category' 'religion' %}">Religion</a>
-          <a class="dropdown-item" href="{% url 'category' 'philosophy' %}">Philosophy</a>
-          <a class="dropdown-item" href="{% url 'category' 'history' %}">History</a>
-          <a class="dropdown-item" href="{% url 'category' 'agriculture' %}">Agriculture</a>
-          </div>
+          <a class="nav-link dropdown-toggle text-gradient" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu bg-dark text-light p-3 category-dropdown" aria-labelledby="categoryDropdown">
+            <div class="row " style="width: 300px;">
+              {% for category in categories %}
+                <div class="col-4">
+                  <a class="dropdown-item text-light" href="{% url 'category_view' category %}">
+                    {{ category }}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </ul>
+        </li>
 
-          
-        
-        <li>
         <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
         <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
+
+  <div class="breaking-news bg-dark text-light py-2">
+    <div class="container">
+      <marquee behavior="scroll" direction="left" scrollamount="5">
+        {% for article in breaking_news %}
+          📰 <a href="{% url 'article_detail' article.pk %}" class="text-warning">
+            {{ article.title }}
+          </a> &nbsp;&nbsp;&nbsp;
+        {% endfor %}
+      </marquee>
+    </div>
+  </div>
+
+
 
   <!-- 🔥 Content -->
   {% block content %}{% endblock %}
