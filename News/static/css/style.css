@@ -376,3 +376,14 @@ body {
   border-radius: 6px;
 }
 
+.category-dropdown {
+  left: 0 !important;               /* align with left edge of button */
+  right: auto !important;           /* prevent overflow to right */
+  transform: none !important;       /* remove Bootstrap's auto positioning */
+  width: 4300px !important;          /* fixed width */
+  max-height: 70vh;                 /* keep inside screen vertically */
+  overflow-y: auto;                 /* scroll if too many categories */
+}
+
+
+
