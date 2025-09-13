@@ -60,6 +60,19 @@
     .btn-gradient:hover {
       opacity: 0.8;
     }
+    
+
+    .category-dropdown {
+      width: 400px !important;       /* fixed width */
+      left: 0 !important;            /* align to left of button */
+      right: auto !important;        /* stop shifting to right */
+      transform: translateX(0) !important; /* cancel Popper offset */
+      max-height: 70vh;              /* safe vertical space */
+      overflow-y: auto;              /* scroll if too tall */
+    }
+
+
+
   </style>
 </head>
 <body>
@@ -78,8 +91,8 @@
           <a class="nav-link dropdown-toggle text-gradient" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </a>
-          <ul class="dropdown-menu bg-dark text-light p-3 category-dropdown" aria-labelledby="categoryDropdown">
-            <div class="row " style="width: 300px; margin-left: 0px;">
+          <ul class="dropdown-menu dropdown-menu-start bg-dark text-light p-3 category-dropdown" aria-labelledby="categoryDropdown">
+            <div class="row g-2">
               {% for category in categories %}
                 <div class="col-4">
                   <a class="dropdown-item text-light" href="{% url 'category_view' category %}">
@@ -90,6 +103,7 @@
             </div>
           </ul>
         </li>
+
 
         <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
         <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
