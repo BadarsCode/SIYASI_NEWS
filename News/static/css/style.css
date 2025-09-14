@@ -10,6 +10,160 @@
   --shadow: 0 10px 30px rgba(0,0,0,.4);
 }
 
+* { box-sizing: border-box; }
+body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); }
+
+.gradient-bg{
+  min-height:100vh;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
+}
+
+.glassy-nav{
+  background: linear-gradient(135deg, #00000088, #1e3a8a88);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.glassy{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.panel .list-group-item{
+  border-color: var(--border) !important;
+}
+.panel .list-group-item.active,
+.panel .list-group-item:hover{
+  background: #06b6d422;
+}
+
+a, .link-light { color: var(--accent); }
+a:hover { color: #67e8f9; }
+
+.ad-placeholder{
+  height: 90px;
+  border: 1px dashed #ffffff33;
+  border-radius: 12px;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--muted);
+}
+
+.cookie-banner{
+  position: fixed; left:0; right:0; bottom:0;
+  background: #000000cc; color: var(--text);
+  backdrop-filter: blur(6px);
+  padding: .75rem 0;
+  border-top: 1px solid var(--border);
+  z-index: 1055;
+}
+
+.visually-hidden-focusable:active, .visually-hidden-focusable:focus {
+  position: static !important;
+  width: auto; height: auto; margin: 0;
+  overflow: visible; clip: auto;
+}
+
+
+body {
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #b5179e, #7209b7, #560bad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.news-card {
+  background: rgba(30, 0, 40, 0.8);
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(181, 23, 158, 0.4);
+}
+
+.news-img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+
+.article-detail {
+  background: rgba(30, 0, 40, 0.85);
+  border-radius: 20px;
+}
+
+.detail-img {
+  border-radius: 15px;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.related-news {
+  background: rgba(40, 0, 60, 0.8);
+  border-radius: 15px;
+}
+
+.related-link {
+  display: flex;
+  align-items: center;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.related-link:hover {
+  color: #b5179e;
+}
+
+.related-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+  
+.btn-gradient {
+  background: linear-gradient(45deg, #b5179e, #7209b7);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.05);
+}
+
+.gradient-navbar {
+  background: linear-gradient(90deg, #3a0ca3, #7209b7, #b5179e);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #f72585, #7209b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-link {
+  color: #ffffff !important;
+  transition: color 0.3s ease;}
+.nav-link:hover {
+  color: #ff66c4 !important;
+}
+
+
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, rgba(26, 0, 31, 0.9), rgba(42, 0, 51, 0.9)), url('https://via.placeholder.com/1920x600/3a0ca3/ffffff?text=News+Background') center/cover no-repeat;
@@ -168,77 +322,68 @@
   width: 100%;
   border-radius: 10px;
 }
-/* From base.html file*/
-body {
-  background: #111;
-  color: #fcfcfcff;
-  font-family: 'Segoe UI', sans-serif;
-}
-.navbar {
-  background: linear-gradient(90deg, purple, red);
-}
-.navbar .nav-link {
-  background: linear-gradient(45deg, purple, red);
-  color: #fff;
-  margin-right: 15px;
-  transition: color 0.3s;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  padding: 5px 10px;
 
-}
-.navbar .nav-link:hover {
-  color: yellow;
-  background: linear-gradient(45deg, red, purple);
-  text-decoration: none;
-  border: 1px solid yellow;
-}
-.text-gradient {
-  background: linear-gradient(90deg, yellow, #ffffffff);
-  -webkit-background-clip: text;
-  /*-webkit-text-fill-color: transparent;*/
-}
-.sidebar-box {
-  background: #1a1a1a;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-.post-card {
-  background: #1a1a1a;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-.post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
-}
-.post-card img {
-  height: 180px;
-  width:100%;
+.gallery-img {
+  height: 220px;         /* gallery image size */
   object-fit: cover;
+  width: 100%;
+  border-radius: 6px;
 }
+
+
+/* Contact us form */
+
+.text-gradient {
+  background: linear-gradient(90deg, purple, black);
+  /*-webkit-background-clip: text;*/
+  -webkit-text-fill-color: transparent;
+}
+
 .btn-gradient {
-  background: linear-gradient(45deg, purple, red);
+  background: linear-gradient(45deg, rgb(253, 251, 253), black);
+  color: #0b0a0a;
   border: none;
-  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
 }
 .btn-gradient:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
+.text-gradient {
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Limit dropdown width */
+.category-dropdown {
+  width: 800px important;
+  max-width: 800px;
+  min-width: 800px;
+}
+
+/* Adjust items */
+.category-dropdown .dropdown-item {
+  padding: 6px 10px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.category-dropdown .dropdown-item:hover {
+  background: linear-gradient(90deg, #f6f6f6, #0b0b0b);
+  color: #1a0a0a !important;
+  border-radius: 6px;
+}
 
 .category-dropdown {
-  width: 400px !important;       /* fixed width */
-  left: 0 !important;            /* align to left of button */
-  right: auto !important;        /* stop shifting to right */
-  transform: translateX(0) !important; /* cancel Popper offset */
-  max-height: 70vh;              /* safe vertical space */
-  overflow-y: auto;              /* scroll if too tall */
+  left: 0 !important;               /* align with left edge of button */
+  right: auto !important;           /* prevent overflow to right */
+  transform: none !important;       /* remove Bootstrap's auto positioning */
+  width: 4300px !important;          /* fixed width */
+  max-height: 70vh;                 /* keep inside screen vertically */
+  overflow-y: auto;                 /* scroll if too many categories */
 }
 
-.dropdown-menu .dropdown-item:hover{
-  background: linear-gradient(45deg, red, purple);
-  color: white !important;
-}
+
+
