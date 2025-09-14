@@ -335,13 +335,13 @@ body {
 
 .text-gradient {
   background: linear-gradient(90deg, purple, black);
-  -webkit-background-clip: text;
+  /*-webkit-background-clip: text;*/
   -webkit-text-fill-color: transparent;
 }
 
 .btn-gradient {
-  background: linear-gradient(45deg, purple, black);
-  color: #fff;
+  background: linear-gradient(45deg, rgb(253, 251, 253), black);
+  color: #0b0a0a;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -356,34 +356,80 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Limit dropdown width */
-.category-dropdown {
-  width: 800px important;
-  max-width: 800px;
-  min-width: 800px;
-}
 
-/* Adjust items */
-.category-dropdown .dropdown-item {
-  padding: 6px 10px;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
 
-.category-dropdown .dropdown-item:hover {
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  color: #fff !important;
+
+/* From base.html file*/
+body {
+  background: #111;
+  color: #fcfcfcff;
+  font-family: 'Segoe UI', sans-serif;
+}
+.navbar {
+  background: linear-gradient(90deg, purple, red);
+}
+.navbar .nav-link {
+  background: linear-gradient(45deg, purple, red);
+  color: #fff;
+  margin-right: 15px;
+  transition: color 0.3s;
   border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+
 }
+.navbar .nav-link:hover {
+  color: yellow;
+  background: linear-gradient(45deg, red, purple);
+  text-decoration: none;
+  border: 1px solid yellow;
+}
+.text-gradient {
+  background: linear-gradient(90deg, yellow, #ffffffff);
+  -webkit-background-clip: text;
+  /*-webkit-text-fill-color: transparent;*/
+}
+.sidebar-box {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.post-card {
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+}
+.post-card img {
+  height: 180px;
+  width:100%;
+  object-fit: cover;
+}
+.btn-gradient {
+  background: linear-gradient(45deg, purple, red);
+  border: none;
+  color: white;
+}
+.btn-gradient:hover {
+  opacity: 0.8;
+}
+
 
 .category-dropdown {
-  left: 0 !important;               /* align with left edge of button */
-  right: auto !important;           /* prevent overflow to right */
-  transform: none !important;       /* remove Bootstrap's auto positioning */
-  width: 4300px !important;          /* fixed width */
-  max-height: 70vh;                 /* keep inside screen vertically */
-  overflow-y: auto;                 /* scroll if too many categories */
+  width: 400px !important;       /* fixed width */
+  left: 0 !important;            /* align to left of button */
+  right: auto !important;        /* stop shifting to right */
+  transform: translateX(0) !important; /* cancel Popper offset */
+  max-height: 70vh;              /* safe vertical space */
+  overflow-y: auto;              /* scroll if too tall */
 }
 
-
-
+.dropdown-menu .dropdown-item:hover{
+  background: linear-gradient(45deg, red, purple);
+  color: white !important;
+}
