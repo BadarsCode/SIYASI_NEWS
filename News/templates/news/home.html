@@ -62,8 +62,8 @@
               {% endif %}
               <div class="p-3">
                 <h6>{{ article.title|truncatechars:50 }}</h6>
-                <p class="small">{{ article.content|truncatechars:100 }}</p>
-                <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read More</a>
+                <p class="small para">{{ article.content|truncatechars:100 }}</p>
+                <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
               </div>
             </div>
           </div>

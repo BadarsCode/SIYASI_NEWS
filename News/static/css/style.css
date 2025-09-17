@@ -358,9 +358,9 @@ body {
 
 /* Limit dropdown width */
 .category-dropdown {
-  width: 800px important;
-  max-width: 800px;
-  min-width: 800px;
+  width: 300px important;
+  max-width: 300px;
+  min-width:300px;
 }
 
 /* Adjust items */
@@ -380,10 +380,13 @@ body {
   left: 0 !important;               /* align with left edge of button */
   right: auto !important;           /* prevent overflow to right */
   transform: none !important;       /* remove Bootstrap's auto positioning */
-  width: 4300px !important;          /* fixed width */
+  width: 100px !important;          /* fixed width */
   max-height: 70vh;                 /* keep inside screen vertically */
   overflow-y: auto;                 /* scroll if too many categories */
 }
 
-
+.para {
+  color: black;
+  text-decoration-color: black;
+}
 
