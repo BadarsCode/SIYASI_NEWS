@@ -111,13 +111,13 @@
     </button>
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item btn btn-primary m-1 "><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-        <li class="nav-item btn btn-primary"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
-        <li class="nav-item dropdown " style="position: relative;">
+        <li class="nav-item btn btn-primary m-2 "><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+        <li class="nav-item btn btn-primary m-2"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+        <li class="nav-item dropdown btn btn-primary m-2 " style="position: relative;">
           <a class="nav-link dropdown-toggle text-gradient" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </a>
-          <ul class="dropdown-menu dropdown-menu-start bg-black p-3 category-dropdown" aria-labelledby="categoryDropdown">
+          <ul class="dropdown-menu dropdown-menu-start bg-black p-3 category-dropdown " aria-labelledby="categoryDropdown">
             <div class="row g-2">
               {% for category in categories %}
                 <div class="col-6">
@@ -131,8 +131,8 @@
         </li>
 
 
-        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+        <li class="nav-item btn btn-primary m-2"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+        <li class="nav-item btn btn-primary m-2"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
