@@ -27,8 +27,8 @@
   </div>
   <div class="row">
     <div class="col-12 text-center mb-4">
-      <h2 class="text-white">Latest News</h2>
-      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #ffffffff;">
+      <h2 class="text-dark">Latest News</h2>
+      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #3135feff;">
     </div>
   </div>
 
@@ -66,8 +66,8 @@
               {% if article.images %}
                 <img src="{{ article.images.url }}" alt="{{ article.title }}">
               {% endif %}
-              <div class="p-3">
-                <h6>{{ article.title|truncatechars:50 }}</h6>
+              <div class="p-3 ">
+                <h6 class = "text-dark">{{ article.title|truncatechars:50 }}</h6>
                 <p class="small para">{{ article.content|truncatechars:100 }}</p>
                 <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
               </div>
