@@ -25,24 +25,30 @@
       <span class="carousel-control-next-icon"></span>
     </button>
   </div>
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <h2 class="text-white">Latest News</h2>
+      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #ffffffff;">
+    </div>
+  </div>
 
   <div class="row">
     <!-- 🔥 Sidebar -->
-    <div class="col-md-2 d-none d-lg-block">
-      <div class="sidebar-box">
+    <div class="col-md-2 d-none  d-lg-block">
+      <div class="sidebar-box bg-white">
         <h5 class="text-gradient">Categories</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-light">Politics</a></li>
-          <li><a href="#" class="text-light">Economy</a></li>
-          <li><a href="#" class="text-light">Sports</a></li>
-          <li><a href="#" class="text-light">Technology</a></li>
+          <li><a href="#" class="text-dark">Politics</a></li>
+          <li><a href="#" class="text-dark">Economy</a></li>
+          <li><a href="#" class="text-dark">Sports</a></li>
+          <li><a href="#" class="text-dark">Technology</a></li>
         </ul>
       </div>
       <div class="sidebar-box bg-white ">
         <h5 class="text-gradient">Top Posts</h5>
         <ol class="ps-3">
           {% for article in top_articles %}
-            <li><a href="{% url 'article_detail' article.pk %}" class="text-light">{{ article.title|truncatechars:40 }}</a></li>
+            <li><a href="{% url 'article_detail' article.pk %}" class="text-dark">{{ article.title|truncatechars:40 }}</a></li>
           {% endfor %}
         </ol>
       </div>
