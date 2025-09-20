@@ -62,7 +62,7 @@
       <div class="row">
         {% for article in all_articles %}
           <div class="col-md-4 mb-4">
-            <div class="post-card">
+            <div class="post-card bg-warning">
               {% if article.images %}
                 <img src="{{ article.images.url }}" alt="{{ article.title }}">
               {% endif %}

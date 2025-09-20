@@ -95,6 +95,7 @@
 .news-card {
   transition: all 0.4s ease;
   overflow: hidden;
+
 }
 
 .news-card:hover {
