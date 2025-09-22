@@ -6,12 +6,12 @@
     <div class="row align-items-center">
       <div class="col-lg-8">
         <h1 class="display-4 text-gradient fw-bold mb-3">{{ article.title }}</h1>
-        <p class="lead text-light mb-4">{{ article.content|truncatechars:200 }}</p>
+        <p class="lead text-dark mb-4">{{ article.content|truncatechars:200 }}</p>
         <div class="d-flex align-items-center mb-4">
           <i class="fas fa-calendar-alt me-2 text-muted"></i>
           <span class="text-muted">{{ article.published_at|date:"F d, Y" }}</span>
         </div>
-        <a href="{% url 'home' %}" class="btn btn-outline-light btn-lg">⬅ Back to News</a>
+        <a href="{% url 'home' %}" class="btn btn-outline-dark btn-lg">⬅ Back to News</a>
       </div>
       <div class="col-lg-4">
         {% if article.images %}
@@ -25,45 +25,4 @@
     </div>
   </div>
 </section>
-
-<!-- Article Content and Sidebar -->
-<div class="container my-5">
-  <div class="row">
-    <!-- Main Article -->
-    <div class="col-lg-8 mb-4">
-      <div class="article-detail p-4 shadow-lg rounded">
-        {% if article.images %}
-          <img src="{{ article.images.url }}" alt="{{ article.title }}" class="img-fluid mb-4 detail-img rounded">
-        {% endif %}
-        <div class="article-content text-light">
-          {{ article.content|linebreaks }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Sidebar: Related News -->
-    <div class="col-lg-4">
-      <div class="related-news p-4 shadow-lg rounded h-100">
-        <h4 class="text-gradient mb-4">More News</h4>
-        <div class="related-list">
-          {% for item in articles %}
-            <div class="related-item mb-3 p-3 rounded">
-              <a href="{% url 'article_detail' item.pk %}" class="related-link d-flex align-items-center">
-                {% if item.images %}
-                  <img src="{{ item.images.url }}" class="related-img me-3" alt="{{ item.title }}">
-                {% endif %}
-                <div class="flex-grow-1">
-                  <h6 class="mb-1 text-white">{{ item.title }}</h6>
-                  <small class="text-muted">{{ item.published_at|date:"M d, Y" }}</small>
-                </div>
-              </a>
-            </div>
-          {% empty %}
-            <p class="text-light text-center">No related articles available.</p>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}

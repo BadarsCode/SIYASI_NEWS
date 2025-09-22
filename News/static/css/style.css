@@ -225,7 +225,7 @@
 
 
 .navbar {
-  background: linear-gradient(90deg, #0d6efd, #6610f2); /* Blue to Purple */
+  background:white; /* Blue to Purple */
 }
 
 .navbar .nav-link {
@@ -236,17 +236,74 @@
   transition: all 0.3s ease;
 }
 
-.navbar .nav-link:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffcc00; /* gold hover */
-}
 
-.dropdown-menu .dropdown-item {
-  transition: all 0.3s ease;
-}
 
-.dropdown-menu .dropdown-item:hover {
-  background: #333;
-  color: #ffcc00;
-}
 
+
+
+
+
+
+
+
+
+/* CSS: customize colors/sizes if you want */
+#chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: purple;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+  #chatbot-box {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: #1c1c1c;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .hidden { display: none; }
+  #chatbot-header {
+    background: linear-gradient(90deg, purple, black);
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+  }
+  #chatbot-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  #chatbot-input {
+    display: flex;
+    border-top: 1px solid #333;
+  }
+  #chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+  }
+  #chatbot-input button {
+    background: purple;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .msg-user { text-align: right; margin: 5px; }
+  .msg-bot { text-align: left; margin: 5px; }

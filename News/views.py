@@ -8,6 +8,10 @@ from django.shortcuts import redirect
 from rest_framework import generics
 from .serializers import NewsArticleSerializer
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 
 class NewsArticleListAPI(generics.ListCreateAPIView):
@@ -83,3 +87,20 @@ def CategoryView(request, category_name):
 def category_view(request, category):
     article = NewsArticle.objects.filter(category=category).order_by('-published_at')
     return render(request, 'news/category.html', {'article': article, 'category': category})
+
+
+@csrf_exempt
+def chatbot_view(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user_msg = data.get("message", "")
+
+        # Simple rule-based bot
+        if "hello" in user_msg.lower():
+            reply = "Hello! 👋 How can I help you today?"
+        elif "news" in user_msg.lower():
+            reply = "You can explore the latest news in the categories above 📢."
+        else:
+            reply = "Sorry, I don’t understand that yet. 😅"
+
+        return JsonResponse({"reply": reply})

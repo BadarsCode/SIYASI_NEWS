@@ -30,6 +30,9 @@ urlpatterns = [
     path('api/articles/', views.NewsArticleListAPI.as_view(), name='api_articles'),
     path('api/articles/<int:pk>/', views.NewsArticleDetailAPI.as_view(), name='api_article_detail'),
     path('category/<str:category_name>/', views.CategoryView, name='category'),
+    # Chatbot
+    path("chatbot/", views.chatbot_view, name="chatbot"),
+
 
 ]
 
