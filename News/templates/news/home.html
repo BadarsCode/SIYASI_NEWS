@@ -36,7 +36,7 @@
     <!-- 🔥 Sidebar -->
     <div class="col-md-2 d-none  d-lg-block">
       <div class="sidebar-box bg-white">
-        <h5 class="text-gradient">Categories</h5>
+        <h5 class="text-dark">Categories</h5>
         <ul class="list-unstyled">
           <li><a href="#" class="text-dark">Politics</a></li>
           <li><a href="#" class="text-dark">Economy</a></li>
@@ -45,7 +45,7 @@
         </ul>
       </div>
       <div class="sidebar-box bg-white ">
-        <h5 class="text-gradient">Top Posts</h5>
+        <h5 class="text-dark">Top Posts</h5>
         <ol class="ps-3">
           {% for article in top_articles %}
             <li><a href="{% url 'article_detail' article.pk %}" class="text-dark">{{ article.title|truncatechars:40 }}</a></li>
@@ -62,7 +62,7 @@
       <div class="row">
         {% for article in all_articles %}
           <div class="col-md-4 mb-4">
-            <div class="post-card bg-warning">
+            <div class="post-card bg-light">
               {% if article.images %}
                 <img src="{{ article.images.url }}" alt="{{ article.title }}">
               {% endif %}

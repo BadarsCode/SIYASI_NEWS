@@ -194,7 +194,6 @@
 
 .text-gradient {
   background: linear-gradient(90deg, #7b2ff7, #f107a3);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -246,9 +245,7 @@
 
 
 
-
-/* CSS: customize colors/sizes if you want */
-#chatbot-btn {
+  #chatbot-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
