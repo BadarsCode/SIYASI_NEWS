@@ -18,189 +18,13 @@
   <meta property="og:image" content="{% if articles and articles.0.images %}{{ articles.0.images.url }}{% endif %}">
   <meta property="og:url" content="{{ request.build_absolute_uri }}">
   <meta name="twitter:card" content="summary_large_image">
-
-  <style>
-    body {
-      background: #fff;
-      color: #c0bbbbff;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .navbar {
-      background: white;
-      border: 2px solid black;
-      color: black;
-      border-radius: 8px;
-      box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
-      margin-top:10px;
-    }
-    .navbar .nav-link {
-      color: #0d51fcff;
-      margin-right: 15px;
-      transition: color 0.3s;
-      border-radius: 6px;
-      background: #0d51fcff;
-      border: 2px solid #0d51fcff;
-      padding: 5px 10px;
-    } 
-    .navbar .nav-link:hover {
-      color: white;
-      background: #0423c1ff;
-      text-decoration: none;
-      border: 2px solid black;
-    }
-
-    .text-gradient {
-      background: linear-gradient(90deg, yellow, #ffffffff);
-      -webkit-background-clip: text;
-      /*-webkit-text-fill-color: transparent;*/
-    }
-    .sidebar-box {
-      background: #1a1a1a;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .post-card {
-      border: 2px solid #4039ffff;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      shadow: 4px 4px 12px rgba(0,0,0,0.4);
-    }
-    .post-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
-    }
-    .post-card img {
-      padding: 10px;
-      border-radius: 10%;
-      height: 180px;
-      width:100%;
-      object-fit: cover;
-    }
-    .btn-gradient {
-      background: white;
-      border: 3px solid black;
-      color: black;
-
-    }
-    .btn-gradient:hover {
-      background: black;
-      color: white;
-      border: 3px solid white;
-    }
+  
+  {% comment %}
+    External CSS 
+  {% endcomment %}
     
-
-    .category-dropdown {
-      width: 400px !important;       /* fixed width */
-      left: 0 !important;            /* align to left of button */
-      right: auto !important;        /* stop shifting to right */
-      transform: translateX(0) !important; /* cancel Popper offset */
-      max-height: 70vh;              /* safe vertical space */
-      overflow-y: auto;              /* scroll if too tall */
-    }
-
-     .dropdown-menu .dropdown-item :hover{
-      background: #395affff;
-      color: black !important;
-    }
-
-
-
-
-
-/* Floating Button */
-#chat-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: purple;
-    color: white;
-    font-size: 22px;
-    padding: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 1000;
-}
-
-/* Chat Window */
-#chat-window {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: none; /* hidden by default */
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 1000;
-}
-
-.chat-header {
-    background: purple;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-}
-
-#chat-body {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 14px;
-}
-
-.chat-footer {
-    display: flex;
-    border-top: 1px solid #ddd;
-}
-
-.chat-footer input {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    outline: none;
-}
-
-.chat-footer button {
-    background: purple;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </style>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="sytlesheet" href="{% static 'css/bootstrap.css'}">
+  <link rel="stylesheet" href="{% static 'News/css/style.css' %}">
+  <link rel="sytlesheet" href="{% static 'News/css/bootstrap.css'}">
 </head>
 <body style="background: white;">
   
@@ -224,7 +48,7 @@
             <div class="row g-2">
               {% for category in categories %}
                 <div class="col-6">
-                  <a class="dropdown-item text-white" href="{% url 'category_view' category %}">
+                  <a class="dropdown-item" href="{% url 'category_view' category %}">
                     {{ category }}
                   </a>
                 </div>
