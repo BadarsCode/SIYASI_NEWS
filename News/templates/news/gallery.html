@@ -6,7 +6,7 @@
   <div class="row">
     {% for article in articles %}
       <div class="col-md-3 mb-4">
-        <div class="card bg-dark text-light shadow-lg border-0">
+        <div class="card bg-light text-dark shadow-lg border-0">
           {% if article.images %}
             <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
           {% endif %}

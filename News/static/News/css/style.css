@@ -159,3 +159,11 @@
     cursor: pointer;
 }
 
+
+
+.gallery-img {
+    width: 100%;            /* fill card width */
+    height: 200px;          /* fixed height for all */
+    object-fit: cover;      /* crop image but keep aspect ratio */
+    border-radius: 8px;     /* optional rounded corners */
+}
