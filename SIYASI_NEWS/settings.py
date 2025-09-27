@@ -150,3 +150,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "businessofcoding@gmail.com"
 EMAIL_HOST_PASSWORD = 'yrlg xxth ilzx azvy'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+import os
+GEN_API_KEY = os.getenv('GEN_API_KEY')

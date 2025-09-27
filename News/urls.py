@@ -32,6 +32,7 @@ urlpatterns = [
     path('category/<str:category_name>/', views.CategoryView, name='category'),
     # Chatbot
     path("chatbot/", views.chatbot_view, name="chatbot"),
+    path("api/chatbot/", views.chatbot_api, name="chatbot_api"),
 
 
 ]

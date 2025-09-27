@@ -7,10 +7,34 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from rest_framework import generics
 from .serializers import NewsArticleSerializer
-
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import google.generativeai as genai
+
+genai.configure(api_key=settings.GEN_API_KEY)  # Use the API key from settings
+
+@csrf_exempt
+def chatbot_api(request):
+    if request.method=="POST":
+        data= json.loads(request.body)
+        user_msg=data.get("message", "")
+        
+        try:
+            model = genai.generativeModel('gemini-pro')
+            response = model.generate_message(
+                prompt=user_msg,
+                max_output_tokens=200,
+                temperature=0.7,
+                top_p=0.8,
+                top_k=40,
+                stop_sequences=['\n']
+            )
+            bot_reply= response.text 
+        except Exception as e:
+            bot_reply = f"Sorry, I am having trouble responding right now.{e}"
+        return JsonResponse({"reply": bot_reply})
+    return JsonResponse({"reply": "Invalid request method."}, status=400)
+
 
 
 

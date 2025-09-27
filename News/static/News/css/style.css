@@ -92,7 +92,7 @@
 
 
 
-/* Floating Button */
+/* Floating Button *
 #chat-button {
     position: fixed;
     bottom: 20px;
@@ -107,7 +107,7 @@
     z-index: 1000;
 }
 
-/* Chat Window */
+/* Chat Window *
 #chat-window {
     position: fixed;
     bottom: 70px;
@@ -117,7 +117,7 @@
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: none; /* hidden by default */
+    display: none; /* hidden by default *
     flex-direction: column;
     overflow: hidden;
     z-index: 1000;
@@ -162,8 +162,54 @@
 
 
 .gallery-img {
-    width: 100%;            /* fill card width */
-    height: 200px;          /* fixed height for all */
-    object-fit: cover;      /* crop image but keep aspect ratio */
-    border-radius: 8px;     /* optional rounded corners */
+    width: 100%;            /* fill card width *
+    height: 200px;          /* fixed height for all *
+    object-fit: cover;      /* crop image but keep aspect ratio *
+    border-radius: 8px;     /* optional rounded corners *
+}
+*/
+
+.chatbot {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  height: 400px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.chat-header {
+  background: purple;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  color: white;
+}
+.chat-footer {
+  display: flex;
+}
+#chat-input {
+  flex: 1;
+  padding: 5px;
+}
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: purple;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
 }

@@ -1,50 +1,39 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Console check
-  console.log('Siyasi News loaded');
+// Toggle Chat Window
+document.getElementById("chat-toggle").addEventListener("click", () => {
+  const chatbot = document.getElementById("chatbot");
+  chatbot.style.display =
+    chatbot.style.display === "flex" ? "none" : "flex";
+});
 
-  // Cookie banner logic (simple)
-  const banner = document.getElementById('cookie-banner');
-  const accepted = localStorage.getItem('cookieConsent');
-  if (banner && !accepted) {
-    banner.hidden = false;
-    document.getElementById('cookie-accept').onclick = () => {
-      localStorage.setItem('cookieConsent', 'accepted');
-      banner.hidden = true;
-    };
-    document.getElementById('cookie-decline').onclick = () => {
-      localStorage.setItem('cookieConsent', 'declined');
-      banner.hidden = true;
-    };
+// Send Message
+document.getElementById("chat-send").addEventListener("click", async () => {
+  const input = document.getElementById("chat-input");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const chatBody = document.getElementById("chat-body");
+  chatBody.innerHTML += `<div><b>You:</b> ${message}</div>`;
+  input.value = "";
+
+  try {
+    const response = await fetch("/chatbot-api/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+    chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+  } catch (error) {
+    chatBody.innerHTML += `<div><b>Bot:</b> Sorry, I couldn’t connect.</div>`;
   }
 
-  // AJAX load on left list click
-  const list = document.getElementById('news-list');
-  if (list) {
-    list.querySelectorAll('li').forEach(li => {
-      li.addEventListener('click', () => {
-        const id = li.getAttribute('data-id');
-        list.querySelectorAll('li').forEach(x => x.classList.remove('active'));
-        li.classList.add('active');
+  chatBody.scrollTop = chatBody.scrollHeight;
+});
 
-        fetch(`/article/ajax/${id}/`)
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById('article-content').innerHTML = data.html;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
-      });
-    });
-  }
-
-  // Simple client-side search
-  const search = document.getElementById('news-search');
-  if (search) {
-    search.addEventListener('input', function () {
-      const q = this.value.toLowerCase().trim();
-      list.querySelectorAll('li').forEach(li => {
-        const txt = li.innerText.toLowerCase();
-        li.style.display = txt.includes(q) ? '' : 'none';
-      });
-    });
+// Optional: Press Enter to Send
+document.getElementById("chat-input").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    document.getElementById("chat-send").click();
   }
 });
