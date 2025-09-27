@@ -1,39 +1,44 @@
-// Toggle Chat Window
-document.getElementById("chat-toggle").addEventListener("click", () => {
-  const chatbot = document.getElementById("chatbot");
-  chatbot.style.display =
-    chatbot.style.display === "flex" ? "none" : "flex";
-});
+ const toggleBtn = document.getElementById("chat-toggle");
+  const chatbox = document.getElementById("chatbox");
+  const sendBtn = document.getElementById("send-btn");
+  const userInput = document.getElementById("user-message");
+  const messagesDiv = document.getElementById("chat-messages");
 
-// Send Message
-document.getElementById("chat-send").addEventListener("click", async () => {
-  const input = document.getElementById("chat-input");
-  const message = input.value.trim();
-  if (!message) return;
+  // Toggle chatbot visibility
+  toggleBtn.addEventListener("click", () => {
+    chatbox.style.display = chatbox.style.display === "none" ? "flex" : "none";
+  });
 
-  const chatBody = document.getElementById("chat-body");
-  chatBody.innerHTML += `<div><b>You:</b> ${message}</div>`;
-  input.value = "";
+  // Send message
+  async function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
 
-  try {
-    const response = await fetch("/chatbot-api/", {
+    // Show user message
+    messagesDiv.innerHTML += `<div><b>You:</b> ${message}</div>`;
+    userInput.value = "";
+
+    // Send to Django
+    const response = await fetch("/chatbot/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}",
+      },
+      body: JSON.stringify({ message }),
     });
 
     const data = await response.json();
-    chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
-  } catch (error) {
-    chatBody.innerHTML += `<div><b>Bot:</b> Sorry, I couldn’t connect.</div>`;
+    if (data.reply) {
+      messagesDiv.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+    } else {
+      messagesDiv.innerHTML += `<div><b>Bot:</b> Error!</div>`;
+    }
+
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
 
-  chatBody.scrollTop = chatBody.scrollHeight;
-});
-
-// Optional: Press Enter to Send
-document.getElementById("chat-input").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    document.getElementById("chat-send").click();
-  }
-});
+  sendBtn.addEventListener("click", sendMessage);
+  userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
