@@ -227,3 +227,23 @@
     color: white;
     cursor: pointer;
   }
+
+
+  #myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+}
+
+
+
+/* LOgin css */
+.bg-gradient {
+  background: linear-gradient(135deg, #000000, #2e0854, #6a11cb);
+}
+.card input:focus {
+  border-color: #6a11cb !important;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.8);
+}

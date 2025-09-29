@@ -1,13 +1,22 @@
- const toggleBtn = document.getElementById("chat-toggle");
-  const chatbox = document.getElementById("chatbox");
-  const sendBtn = document.getElementById("send-btn");
-  const userInput = document.getElementById("user-message");
-  const messagesDiv = document.getElementById("chat-messages");
+const toggleBtn = document.getElementById("chat-toggle");
+//const chatbox = document.getElementById("chatbox");
+const sendBtn = document.getElementById("send-btn");
+const userInput = document.getElementById("user-message");
+const messagesDiv = document.getElementById("chat-messages");
 
   // Toggle chatbot visibility
-  toggleBtn.addEventListener("click", () => {
-    chatbox.style.display = chatbox.style.display === "none" ? "flex" : "none";
-  });
+  // toggleBtn.addEventListener("click", () => {
+  //   chatbox.style.display = chatbox.style.display === "none" ? "flex" : "none";
+  // });
+function chat_window(){
+  var chatbox = document.getElementById('chatbox');
+  if (chatbox.style.display==="none"){
+    chatbox.style.display='block';
+  } else {
+    chatbox.style.display='none';
+  }
+    
+  }
 
   // Send message
   async function sendMessage() {
@@ -42,3 +51,14 @@
   userInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") sendMessage();
   });
+
+
+
+// function myFunction() {
+//   var x = document.getElementById("myDIV");
+//   if (x.style.display === "none"){
+//     x.style.display = "block";
+//   } else  {
+//     x.style.display= "none";
+//   }
+// }

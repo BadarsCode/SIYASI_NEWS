@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from .models import NewsArticle
 from django.core.mail import send_mail
 from django.conf import settings
@@ -128,3 +128,12 @@ def chatbot_view(request):
             reply = "Sorry, I don’t understand that yet. 😅"
 
         return JsonResponse({"reply": reply})
+
+# login view
+def login_view(request):
+    return render(request, 'news/login.html')
+
+def signup_view(request):
+    return render(request, 'news/signup.html')
+def logout_view(request):
+    return HttpResponse("You have been logged out.")

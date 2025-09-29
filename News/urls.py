@@ -33,6 +33,10 @@ urlpatterns = [
     # Chatbot
     path("chatbot/", views.chatbot_view, name="chatbot"),
     path("api/chatbot/", views.chatbot_api, name="chatbot_api"),
+    # Login page
+    path('login/', views.login_view, name='login'),
+    path('signup/', views.signup_view, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
 
 
 ]
