@@ -39,7 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'News',
     'rest_framework',
+
+
+    # allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Providers
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
 ]
+SITE_ID = 1
+LOGIN_REDIRECT_URL='home'
+LOGOUT_REDIRECT_URL='login'
 
 STATIC_URL='/static/'
 
@@ -60,6 +75,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # authentication meddleware
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'SIYASI_NEWS.urls'
