@@ -5,7 +5,6 @@
     }
     .navbar {
       background: rgb(32, 32, 32);
-      border: 2px solid black;
       color: black;
       border-radius: 8px;
       box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
@@ -19,19 +18,25 @@
     text-decoration: none;
     padding: 8px 12px;
     z-index: 1;                 /* place above highlight */
-    transition: color .2s ease;
+    transition: color 0.5s ease;
   }
     .navbar .nav-link {
       color: #007bff;
+      position: relative;
+      text-decoration: none;
+      z-index: 1;
+      padding: 8px 15px;
+      transition: color 0.3s ease;
     } 
     .navbar .nav-link:hover {
-      color: rgb(19, 19, 19);
-      background: linear-gradient(45deg, #1a1a1a, #007bff);
+      color: rgb(255, 253, 253);
+      background: linear-gradient(45deg, #1a1a1a, #0baaff);
       text-decoration: none;
-      border: 2px solid black;
       border-radius: 10px;
 
-    }
+    } 
+
+
 
     .text-gradient {
       background: linear-gradient(90deg, yellow, #ffffffff);
@@ -77,7 +82,7 @@
     
 
     .category-dropdown {
-      width: 400px !important;       /* fixed width */
+      width: 300px !important;       /* fixed width */
       left: 0 !important;            /* align to left of button */
       right: auto !important;        /* stop shifting to right */
       transform: translateX(0) !important; /* cancel Popper offset */
