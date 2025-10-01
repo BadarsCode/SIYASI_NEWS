@@ -71,17 +71,19 @@
   </nav>
 
 
-  <div class="breaking-news bg-dark text-light py-2 m-2">
-    <div class="container">
-      <marquee behavior="scroll" direction="left" scrollamount="5">
-        {% for article in breaking_news %}
-          📰 <a href="{% url 'article_detail' article.pk %}" class="text-warning">
-            {{ article.title }}
-          </a> &nbsp;&nbsp;&nbsp;
-        {% endfor %}
-      </marquee>
-    </div>
+<div class="breaking-news bg-danger text-light py-2 m-2">
+  <div class="container d-flex align-items-center">
+    <span class="fw-bold ">Breaking News</span>
+    <marquee behavior="scroll" direction="left" scrollamount="5" class="flex-grow-1">
+      {% for article in breaking_news %}
+        📰 <a href="{% url 'article_detail' article.pk %}" class="text-warning">
+          {{ article.title }}
+        </a> &nbsp;&nbsp;&nbsp;
+      {% endfor %}
+    </marquee>
   </div>
+</div>
+
 
   
     <div class="container mt-4">
