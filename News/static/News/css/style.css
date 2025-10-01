@@ -4,27 +4,33 @@
       font-family: 'Segoe UI', sans-serif;
     }
     .navbar {
-      background: white;
+      background: rgb(32, 32, 32);
       border: 2px solid black;
       color: black;
       border-radius: 8px;
       box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
       margin-top:10px;
     }
+    .nav-link {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    z-index: 1;                 /* place above highlight */
+    transition: color .2s ease;
+  }
     .navbar .nav-link {
-      color: white;
-      margin-right: 15px;
-      transition: color 0.3s;
-      border-radius: 6px;
-      background: #0d51fcff;
-      border: 2px solid black;
-      padding: 5px 10px;
+      color: #007bff;
     } 
     .navbar .nav-link:hover {
       color: rgb(19, 19, 19);
-      background: #0423c1ff;
+      background: linear-gradient(45deg, #1a1a1a, #007bff);
       text-decoration: none;
       border: 2px solid black;
+      border-radius: 10px;
+
     }
 
     .text-gradient {
