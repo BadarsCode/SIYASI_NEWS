@@ -302,12 +302,10 @@
 /* -----------------
    RESPONSIVE DESIGN
 ------------------ */
-
-/* Tablets and Small Laptops */
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   #chatbox {
-    width: 240px;
-    height: 300px;
+    width: 340px;
+    height: 350px;
     right: 15px;
     bottom: 85px;
   }
@@ -322,7 +320,7 @@
 
   .message {
     max-width: 90%;
-    font-size: 8px;
+    font-size: 12px;
   }
 
   .chat-header h3 {
@@ -331,10 +329,38 @@
   .chat-header{
     height:10px;
   }
-  #send-btn{
-    width:44px;
-    height:44px;
-    font-size:small;
+}
+
+
+
+
+/* Tablets and Small Laptops */
+@media (max-width: 768px) {
+  #chatbox {
+    width: 340px;
+    height: 350px;
+    right: 15px;
+    bottom: 85px;
+  }
+
+  #chat-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .message {
+    max-width: 90%;
+    font-size: 12px;
+  }
+
+  .chat-header h3 {
+    font-size: 14px;
+  }
+  .chat-header{
+    height:10px;
   }
 }
 
@@ -343,7 +369,7 @@
 @media (max-width: 640px) {
   #chatbox {
     width: 320px;
-    height: 450px;
+    height: 350px;
     right: 10px;
     bottom: 80px;
   }
@@ -373,7 +399,7 @@
 @media (max-width: 480px) {
   #chatbox {
     width: calc(100vw - 20px);
-    height: 200px;
+    height: 300px;
     right: 10px;
     left: 10px;
     bottom: 75px;
@@ -419,7 +445,7 @@
 /* Very Small Mobile Devices */
 @media (max-width: 360px) {
   #chatbox {
-    height: 200px;
+    height: 300px;
     width: calc(100vw - 16px);
     right: 8px;
     left: 8px;
@@ -454,8 +480,8 @@
 /* Large Screens */
 @media (min-width: 1200px) {
   #chatbox {
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 380px;
   }
 }
 
