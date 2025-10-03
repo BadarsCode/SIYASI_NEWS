@@ -15,27 +15,76 @@ genai.configure(api_key=settings.GEN_API_KEY)  # Use the API key from settings
 
 @csrf_exempt
 def chatbot_api(request):
-    if request.method=="POST":
-        data= json.loads(request.body)
-        user_msg=data.get("message", "")
-        
+    if request.method == "POST":
         try:
-            model = genai.generativeModel('gemini-pro')
-            response = model.generate_message(
-                prompt=user_msg,
-                max_output_tokens=200,
-                temperature=0.7,
-                top_p=0.8,
-                top_k=40,
-                stop_sequences=['\n']
-            )
-            bot_reply= response.text 
+            data = json.loads(request.body)
+            user_msg = data.get("message", "").strip()
+            
+            if not user_msg:
+                return JsonResponse({"reply": "Please type a message."}, status=400)
+            
+            # Try using Gemini API first
+            try:
+                model = genai.GenerativeModel('gemini-pro')
+                response = model.generate_content(user_msg)
+                bot_reply = response.text
+            except Exception as gemini_error:
+                print(f"Gemini API Error: {gemini_error}")
+                # Fallback to rule-based responses
+                bot_reply = get_rule_based_response(user_msg)
+            
+            return JsonResponse({"reply": bot_reply})
+            
+        except json.JSONDecodeError:
+            return JsonResponse({"reply": "Invalid request format."}, status=400)
         except Exception as e:
-            bot_reply = f"Sorry, I am having trouble responding right now.{e}"
-        return JsonResponse({"reply": bot_reply})
-    return JsonResponse({"reply": "Invalid request method."}, status=400)
+            print(f"Error in chatbot_api: {e}")
+            return JsonResponse({
+                "reply": "Sorry, I'm experiencing technical difficulties. Please try again later."
+            }, status=500)
+    
+    return JsonResponse({"reply": "Invalid request method."}, status=405)
 
 
+def get_rule_based_response(message):
+    '''Fallback rule-based responses'''
+    message_lower = message.lower()
+    
+    # Greetings
+    if any(word in message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
+        return "Hello! 👋 I'm your news assistant. How can I help you today?"
+    
+    # News related
+    elif any(word in message_lower for word in ['news', 'article', 'latest', 'recent']):
+        return "You can explore the latest news in various categories on our homepage. Browse through Politics, Sports, Technology, Entertainment, and more! 📰"
+    
+    # About
+    elif 'about' in message_lower:
+        return "We're a news platform dedicated to bringing you the latest updates from around the world. Check out our About page for more information! ℹ️"
+    
+    # Contact
+    elif 'contact' in message_lower:
+        return "You can reach us through our Contact page. We'd love to hear from you! 📧"
+    
+    # Categories
+    elif 'category' in message_lower or 'categories' in message_lower:
+        return "We cover multiple categories including Politics, Sports, Technology, Entertainment, Business, and more. Use the menu to explore! 📑"
+    
+    # Help
+    elif 'help' in message_lower:
+        return "I can help you navigate the site, find news articles, or answer questions about our platform. What would you like to know? 🤔"
+    
+    # Thank you
+    elif any(word in message_lower for word in ['thanks', 'thank you', 'appreciate']):
+        return "You're welcome! Feel free to ask if you need anything else. 😊"
+    
+    # Goodbye
+    elif any(word in message_lower for word in ['bye', 'goodbye', 'see you']):
+        return "Goodbye! Have a great day! 👋"
+    
+    # Default
+    else:
+        return "I'm here to help! You can ask me about news categories, how to navigate the site, or any other questions. What would you like to know? 🤖"
 
 
 class NewsArticleListAPI(generics.ListCreateAPIView):
