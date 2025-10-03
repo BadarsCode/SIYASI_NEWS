@@ -21,7 +21,7 @@
 
 #chat-toggle:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.6);
+  box-shadow: 0 6px 16px rgba(5, 125, 19, 0.6);
 }
 
 #chat-toggle:active {
@@ -33,8 +33,8 @@
   position: fixed;
   bottom: 90px;
   right: 20px;
-  width: 380px;
-  height: 550px;
+  width: 100px;
+  height: 150px;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 16px;
@@ -247,7 +247,7 @@
 }
 
 #user-message:focus {
-  border-color: #007bff;
+  border-color: black;
 }
 
 #send-btn {
@@ -306,29 +306,38 @@
 /* Tablets and Small Laptops */
 @media (max-width: 768px) {
   #chatbox {
-    width: 340px;
-    height: 500px;
+    width: 240px;
+    height: 300px;
     right: 15px;
     bottom: 85px;
   }
 
   #chat-toggle {
-    width: 56px;
-    height: 56px;
-    font-size: 24px;
-    bottom: 18px;
-    right: 18px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
   }
 
   .message {
-    max-width: 85%;
-    font-size: 13px;
+    max-width: 90%;
+    font-size: 8px;
   }
 
   .chat-header h3 {
-    font-size: 16px;
+    font-size: 14px;
+  }
+  .chat-header{
+    height:10px;
+  }
+  #send-btn{
+    width:44px;
+    height:44px;
+    font-size:small;
   }
 }
+
 
 /* Mobile Landscape and Small Tablets */
 @media (max-width: 640px) {
@@ -364,7 +373,7 @@
 @media (max-width: 480px) {
   #chatbox {
     width: calc(100vw - 20px);
-    height: 450px;
+    height: 200px;
     right: 10px;
     left: 10px;
     bottom: 75px;
@@ -410,7 +419,7 @@
 /* Very Small Mobile Devices */
 @media (max-width: 360px) {
   #chatbox {
-    height: 400px;
+    height: 200px;
     width: calc(100vw - 16px);
     right: 8px;
     left: 8px;
@@ -445,8 +454,8 @@
 /* Large Screens */
 @media (min-width: 1200px) {
   #chatbox {
-    width: 400px;
-    height: 600px;
+    width: 300px;
+    height: 400px;
   }
 }
 
