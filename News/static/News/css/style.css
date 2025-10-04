@@ -79,6 +79,31 @@
       color: white;
       border: 1px solid white;
     }
+    .post-card .btn{
+      align-self:flex-start;
+      margin-top: auto;
+    }
+
+    .post-card .p-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1; /* makes text area stretch equally */
+}
+
+/* Limit paragraph to 2 lines for neat alignment */
+.post-card .para {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* show only 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 40px; /* ensures consistent spacing even for short text */
+}
+
+
+
+
     
 
     .category-dropdown {
