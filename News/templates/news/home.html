@@ -67,10 +67,12 @@
               {% if article.images %}
                 <img src="{{ article.images.url }}" alt="{{ article.title }}">
               {% endif %}
-              <div class="p-3 ">
+              <div class="p-3">
                 <h6 class = "text-dark">{{ article.title|truncatechars:50 }}</h6>
                 <p class="small para">{{ article.content|truncatechars:100 }}</p>
-                <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
+                <div class='col pt-3'>
+                  <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
+                </div>
               </div>
             </div>
           </div>
@@ -79,6 +81,33 @@
         {% endfor %}
       </div>
     </div> 
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <h2 class="text-dark">Gallary</h2>
+      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #3135feff;">
+    </div>
+  </div>
+  <div class="row">
+    {% for article in articles %}
+      <div class="col-md-3 mb-4">
+        <div class="card bg-light text-dark shadow-lg border-0">
+          {% if article.images %}
+            <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
+          {% endif %}
+          <div class="card-body">
+            <h6 class="card-title">{{ article.title|truncatechars:50 }}</h6>
+            <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No images uploaded yet.</p>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
