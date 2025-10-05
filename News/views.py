@@ -25,7 +25,7 @@ def chatbot_api(request):
             
             # Try using Gemini API first
             try:
-                model = genai.GenerativeModel('gemini-pro')
+                model = genai.GenerativeModel('gemini-2.5-flash')
                 response = model.generate_content(user_msg)
                 bot_reply = response.text
             except Exception as gemini_error:
