@@ -186,3 +186,7 @@ def signup_view(request):
     return render(request, 'news/signup.html')
 def logout_view(request):
     return HttpResponse("You have been logged out.")
+
+def category(request):
+    categories = NewsArticle.objects.all()
+    return render(request, "home.html", {'categories':categories})
