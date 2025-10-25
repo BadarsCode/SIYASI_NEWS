@@ -1,4 +1,28 @@
 {% extends 'news/base.html' %}
+<head>
+  {% load static %}
+  <title>{{ article.title }} — Siyasi News</title>
+  <meta name="title" content="{{ article.title }} — Siyasi News">
+  <meta name="description" content="{{ article.summary|truncatewords:25 }}">
+  <meta name="keywords" content="{{ article.category.name }}, Siyasi News, {{ article.title|slice:":60" }}">
+  <meta name="author" content="Siyasi News Team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.siyasinews.com{{ request.path }}">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ article.title }}">
+  <meta property="og:description" content="{{ article.summary|truncatewords:25 }}">
+  <meta property="og:image" content="{{ article.image.url }}">
+  <meta property="og:url" content="https://www.siyasinews.com{{ request.path }}">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ article.title }}">
+  <meta name="twitter:description" content="{{ article.summary|truncatewords:25 }}">
+  <meta name="twitter:image" content="{{ article.image.url }}">
+</head>
+
 {% block content %}
 <!-- Article Hero -->
 <section class="article-hero py-5">
