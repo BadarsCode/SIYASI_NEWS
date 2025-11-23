@@ -1,15 +1,18 @@
 {% include 'base.html' %}
 {% block content %}
-  <h2>Search results for: "{{ query }}"</h2>
+<div class="container mt-4">
+    <h3>Search results for: "{{ query }}"</h3>
+    <hr>
 
-{% for item in results %}
-    <div>
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.content|truncatewords:20 }}</p>
-        <a href="{% url 'news_detail' item.slug %}">Read more</a>
-    </div>
-{% empty %}
-    <p>No results found.</p>
-{% endfor %}
+    {% for item in results %}
+        <div class="mb-3">
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.content|truncatewords:25 }}</p>
+            <a class="btn btn-primary btn-sm" href="{% url 'news_detail' item.slug %}">Read More</a>
+        </div>
+    {% empty %}
+        <p>No matching results found.</p>
+    {% endfor %}
+</div>
 
 {% endblock %}
