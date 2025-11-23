@@ -190,3 +190,9 @@ def logout_view(request):
 def category(request):
     categories = NewsArticle.objects.all()
     return render(request, "home.html", {'categories':categories})
+
+
+def search(request):
+    query = request.GET.get('q')
+    results = NewsArticle.objects.filter(title__icontains=query)
+    return render(request, 'search.html', {'results': results, 'query': query})
