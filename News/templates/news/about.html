@@ -1,17 +1,44 @@
-{% extends 'news/base.html' %}
+﻿{% extends 'news/base.html' %}
 {% block content %}
-<div class="container py-5">
-  <div class="bg-dark text-light p-5 rounded shadow">
-    <h2 class="text-gradient">About Us</h2>
-    <p class="mt-3">
-      Welcome to <strong>Siyasi News</strong> — your trusted source for the latest
-      political, cultural, and social updates.  
-      Our mission is to deliver unbiased, fact-checked, and timely news that matters most to you.  
-    </p>
+<section class="page-hero">
+  <p class="page-eyebrow">About</p>
+  <h2>Siyasi News</h2>
+  <p class="page-sub">Independent reporting, thoughtful analysis, and stories that matter.</p>
+</section>
+
+<section class="about-grid">
+  <div class="about-card">
+    <h3>Our mission</h3>
     <p>
-      We are passionate about providing high-quality journalism with integrity,  
-      while creating a platform for open discussion and informed opinions.
+      We deliver fast, balanced coverage across politics, business, technology, and culture so
+      readers can make informed decisions every day.
     </p>
   </div>
-</div>
+  <div class="about-card">
+    <h3>What we cover</h3>
+    <p>
+      From national policy to local impact, we focus on timely, verifiable stories with clear context
+      and transparent sourcing.
+    </p>
+  </div>
+  <div class="about-card">
+    <h3>Our values</h3>
+    <p>
+      Accuracy, independence, and respect for readers guide every newsroom decision we make.
+    </p>
+  </div>
+</section>
+
+<section class="about-highlight">
+  <div>
+    <h3>Built for modern readers</h3>
+    <p>
+      Follow categories you care about, save stories for later, and ask the news assistant for quick
+      highlights anytime.
+    </p>
+  </div>
+  <a href="{% url 'contact' %}" class="btn btn-gradient">Contact our team</a>
+</section>
 {% endblock %}
+
+

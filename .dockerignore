@@ -1,0 +1,25 @@
+﻿# Byte-compiled / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Env / venv
+.env
+.env.*
+venv/
+env/
+
+# Local DB and uploads
+*.sqlite3
+media/
+news_images/
+staticfiles/
+
+# Git
+.git/
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db

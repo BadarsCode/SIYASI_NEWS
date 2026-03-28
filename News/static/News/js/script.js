@@ -1,4 +1,4 @@
-const toggleBtn = document.getElementById("chat-toggle");
+﻿const toggleBtn = document.getElementById("chat-toggle");
 //const chatbox = document.getElementById("chatbox");
 const sendBtn = document.getElementById("send-btn");
 const userInput = document.getElementById("user-message");
@@ -62,3 +62,5 @@ function chat_window(){
 //     x.style.display= "none";
 //   }
 // }
+
+

@@ -1,111 +1,150 @@
-{% extends 'news/base.html' %}
+﻿{% extends 'news/base.html' %}
 {% block content %}
-<div class="container mt-4">
-
-  <!-- 🔥 Slider -->
-  
-  <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      {% for article in articles %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-          {% if article.images %}
-            <img src="{{ article.images.url }}" class="d-block w-100 rounded" style="height:400px; object-fit:cover;" alt="{{ article.title }}">
-          {% endif %}
-          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
-            <h5>{{ article.title }}</h5>
-            <p>{{ article.content|truncatechars:100 }}</p>
-            <a href="{% url 'article_detail' article.pk %}" class="btn btn-gradient btn-sm">Read More</a>
-          </div>
-        </div>
+<section class="breaking-strip">
+  <span class="breaking-label">Breaking</span>
+  <div class="breaking-items">
+    <marquee
+      behavior="scroll"
+      direction="left"
+      scrollamount="4"
+      onmouseover="this.stop();"
+      onmouseout="this.start();"
+      class="breaking-marquee"
+    >
+      {% for article in breaking_news %}
+        <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+        <span class="breaking-sep">&bull;</span>
+      {% empty %}
+        <span>No breaking news yet.</span>
       {% endfor %}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon bg-primary"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon bg-primary"></span>
-    </button>
+    </marquee>
   </div>
-  <div class="row">
-    <div class="col-12 text-center mb-4">
-      <h2 class="text-dark">Latest News</h2>
-      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #3135feff;">
-    </div>
-  </div>
+</section>
 
-  <div class="row">
-    <!-- 🔥 Sidebar -->
-    <div class="col-md-2 d-none  d-lg-block">
-      <div class="sidebar-box bg-white">
-        <h5 class="text-dark">Categories</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-dark">Politics</a></li>
-          <li><a href="#" class="text-dark">Economy</a></li>
-          <li><a href="#" class="text-dark">Sports</a></li>
-          <li><a href="#" class="text-dark">Technology</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-box bg-white ">
-        <h5 class="text-dark">Top Posts</h5>
-        <ol class="ps-3">
-          {% for article in top_articles %}
-            <li><a href="{% url 'article_detail' article.pk %}" class="text-dark">{{ article.title|truncatechars:40 }}</a></li>
-          {% endfor %}
-        </ol>
-      </div>
-    </div>
-
-    
-
-    <!-- 🔥 Posts Grid -->
-
-    <div class="col-lg-9">
-      <div class="row">
-        {% for article in all_articles %}
-          <div class="col-md-4 mb-4">
-            <div class="post-card bg-light">
-              {% if article.images %}
-                <img src="{{ article.images.url }}" alt="{{ article.title }}">
-              {% endif %}
-              <div class="p-3">
-                <h6 class = "text-dark">{{ article.title|truncatechars:50 }}</h6>
-                <p class="small para">{{ article.content|truncatechars:100 }}</p>
-                <a href="{% url 'article_detail' article.pk %}" id="readmore" class="btn btn-primary btn-gradient">Read More</a>
+<section class="home-hero">
+  <div class="row g-4">
+    <div class="col-lg-7">
+      {% if articles %}
+        {% with lead=articles.0 %}
+        <article class="hero-card">
+          <div class="hero-media">
+            {% if lead.images %}
+              <img src="{{ lead.images.url }}" alt="{{ lead.title }}">
+            {% else %}
+              <div class="hero-placeholder">
+                <i class="fa-regular fa-newspaper"></i>
+                <span>No image available</span>
               </div>
-            </div>
+            {% endif %}
           </div>
+          <div class="hero-body">
+            <div class="hero-meta">
+              <span class="hero-category">{{ lead.category }}</span>
+              <span class="hero-date">{{ lead.published_at|date:"M d, Y" }}</span>
+              {% if lead.pk in saved_ids %}
+                <span class="saved-badge">Saved</span>
+              {% endif %}
+            </div>
+            <h1>{{ lead.title }}</h1>
+            <p>{{ lead.content|truncatechars:180 }}</p>
+            <a href="{% url 'article_detail' lead.pk %}" class="btn hero-btn">Read story</a>
+          </div>
+        </article>
+        {% endwith %}
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon"><i class="fa-regular fa-face-frown"></i></div>
+          <h3>No news yet</h3>
+          <p>Check back soon for the latest updates.</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-lg-5">
+      <div class="hero-list">
+        <h3>Top stories</h3>
+        {% for article in top_articles %}
+          <a href="{% url 'article_detail' article.pk %}" class="hero-list-item">
+            <span class="hero-list-meta">{{ article.category }} | {{ article.published_at|date:"M d" }}</span>
+            <span class="hero-list-title">{{ article.title|truncatechars:80 }}</span>
+          </a>
         {% empty %}
-          <p>No news yet.</p>
+          <p class="text-muted">No top stories yet.</p>
         {% endfor %}
       </div>
-    </div> 
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-12 text-center mb-4">
-      <h2 class="text-dark">Gallary</h2>
-      <hr class="mx-auto" style="width: 100px; border-top: 3px solid #3135feff;">
-    </div>
-  </div>
-  <div class="row">
-    {% for article in articles %}
-      <div class="col-md-3 mb-4">
-        <div class="card bg-light text-dark shadow-lg border-0">
-          {% if article.images %}
-            <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
-          {% endif %}
-          <div class="card-body">
-            <h6 class="card-title">{{ article.title|truncatechars:50 }}</h6>
-            <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read</a>
-          </div>
+      <div class="hero-categories">
+        <h4>Explore categories</h4>
+        <div class="category-pills">
+          {% for category in categories %}
+            <a href="{% url 'category_view' category %}" class="category-pill">{{ category }}</a>
+          {% endfor %}
         </div>
       </div>
-    {% empty %}
-      <p>No images uploaded yet.</p>
-    {% endfor %}
+    </div>
   </div>
+</section>
+
+<section class="section-heading">
+  <div>
+    <h2>Latest News</h2>
+    <p class="section-sub">Fresh reporting across Pakistan and the world.</p>
+  </div>
+</section>
+
+<div class="row">
+  {% for article in all_articles %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <article class="post-card">
+        {% if article.pk in saved_ids %}
+          <span class="saved-badge saved-badge-card">Saved</span>
+        {% endif %}
+        {% if article.images %}
+          <img src="{{ article.images.url }}" alt="{{ article.title }}">
+        {% endif %}
+        <div class="p-3">
+          <div class="hero-meta">
+            <span class="hero-category">{{ article.category }}</span>
+            <span class="hero-date">{{ article.published_at|date:"M d, Y" }}</span>
+          </div>
+          <h6 class="text-dark">{{ article.title|truncatechars:60 }}</h6>
+          <p class="small para">{{ article.content|truncatechars:110 }}</p>
+          <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
+        </div>
+      </article>
+    </div>
+  {% empty %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-face-frown"></i></div>
+      <h3>No news yet</h3>
+      <p>We are preparing new stories.</p>
+    </div>
+  {% endfor %}
+</div>
+
+<section class="section-heading">
+  <div>
+    <h2>From the Gallery</h2>
+    <p class="section-sub">Visual highlights from recent stories.</p>
+  </div>
+</section>
+
+<div class="row">
+  {% for article in all_articles|slice:":4" %}
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        {% if article.images %}
+          <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h6 class="card-title">{{ article.title|truncatechars:55 }}</h6>
+          <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>No images uploaded yet.</p>
+  {% endfor %}
 </div>
 {% endblock %}
+
+
+

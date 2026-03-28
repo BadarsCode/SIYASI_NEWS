@@ -1,0 +1,9 @@
+﻿{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div class="module">
+    <h1>Access denied</h1>
+    <p>Only superusers can access the admin panel.</p>
+    <p><a href="{% url 'home' %}">Return to the site</a></p>
+  </div>
+{% endblock %}

@@ -1,24 +1,32 @@
-{% extends 'news/base.html' %}
-{% block title %}Gallery - Siyasi News{% endblock %}
+﻿{% extends 'news/base.html' %}
 {% block content %}
-<div class="container my-5">
-  <h2 class="text-gradient mb-4">📸 News Gallery</h2>
-  <div class="row">
-    {% for article in articles %}
-      <div class="col-md-3 mb-4">
-        <div class="card bg-light text-dark shadow-lg border-0">
-          {% if article.images %}
-            <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
-          {% endif %}
-          <div class="card-body">
-            <h6 class="card-title">{{ article.title|truncatechars:50 }}</h6>
-            <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient fw-bold ">Read</a>
-          </div>
+<section class="page-hero">
+  <p class="page-eyebrow">Gallery</p>
+  <h2>News gallery</h2>
+  <p class="page-sub">A visual look at the stories shaping the day.</p>
+</section>
+
+<div class="row">
+  {% for article in articles %}
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        {% if article.images %}
+          <img src="{{ article.images.url }}" class="card-img-top gallery-img" alt="{{ article.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h6 class="card-title">{{ article.title|truncatechars:50 }}</h6>
+          <a href="{% url 'article_detail' article.pk %}" class="btn btn-sm btn-gradient">Read</a>
         </div>
       </div>
-    {% empty %}
-      <p>No images uploaded yet.</p>
-    {% endfor %}
-  </div>
+    </div>
+  {% empty %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-image"></i></div>
+      <h3>No gallery items yet</h3>
+      <p>Images will appear here as articles are published.</p>
+    </div>
+  {% endfor %}
 </div>
 {% endblock %}
+
+

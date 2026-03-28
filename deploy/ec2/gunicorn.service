@@ -1,0 +1,15 @@
+﻿[Unit]
+Description=Gunicorn daemon for Siyasi News\nRequires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/siyasi_news/SIYASI_NEWS
+EnvironmentFile=/etc/siyasi_news.env
+ExecStart=/home/ubuntu/siyasi_news/venv/bin/gunicorn --workers 3 --bind unix:/run/siyasi_news.sock SIYASI_NEWS.wsgi:application
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

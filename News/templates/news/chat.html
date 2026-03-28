@@ -1,0 +1,50 @@
+﻿{% extends 'news/base.html' %}
+
+{% block chat_mode %}page{% endblock %}
+
+{% block content %}
+<section class="chat-page-shell">
+  <div class="chat-page-head">
+    <p class="chat-page-eyebrow">Assistant</p>
+    <h2>Chat with Siyasi News</h2>
+    <p class="chat-page-sub">Ask for headlines, browse categories, or search a topic in real time.</p>
+    <a class="btn btn-gradient" href="{% url 'home' %}">Back to news</a>
+  </div>
+
+  <div id="chatbox" class="chat-panel chat-panel-page active" role="dialog" aria-label="Siyasi News Assistant" aria-modal="false">
+    <div class="chat-header">
+      <div class="chat-header-main">
+        <div class="chat-avatar">SN</div>
+        <div>
+          <div class="chat-title">Siyasi News Assistant</div>
+          <div class="chat-subtitle"><span class="chat-status-dot"></span> Online</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close" aria-label="Close chat">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div id="chat-messages"></div>
+
+    <div class="chat-footer">
+      <div class="chat-hint">Try: "latest headlines" or "technology news"</div>
+      <div id="chat-input">
+        <input
+          type="text"
+          id="user-message"
+          placeholder="Ask about headlines, categories, or search..."
+          autocomplete="off"
+        />
+        <button id="send-btn" disabled aria-label="Send message">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ chat_history|json_script:"chat-history" }}
+{% endblock %}
+
+{% block chat_widget %}{% endblock %}

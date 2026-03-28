@@ -1,0 +1,8 @@
+﻿[Unit]
+Description=Gunicorn socket for Siyasi News
+
+[Socket]
+ListenStream=/run/siyasi_news.sock
+
+[Install]
+WantedBy=sockets.target

@@ -1,23 +1,36 @@
-{% extends 'news/base.html' %}
+﻿{% extends 'news/base.html' %}
 {% block content %}
-<div class="container mt-5">
-  <h2 class="text-gradient mb-4">{{ category }} News</h2>
-  <div class="row">
-    {% for article in articles %}
-      <div class="col-md-4 mb-4">
-        <div class="card bg-dark text-light shadow-lg border-0">
-          {% if article.images %}
-            <img src="{{ article.images.url }}" class="card-img-top" alt="{{ article.title }}">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ article.title|truncatechars:60 }}</h5>
-            <a href="{% url 'article_detail_ajax' article.pk %}" class="btn btn-gradient">Read More</a>
-          </div>
+<section class="search-hero">
+  <p class="search-eyebrow">Category</p>
+  <h2 class="search-title">{{ category }} News</h2>
+  <p class="search-meta">Latest updates in {{ category }}.</p>
+</section>
+
+<div class="row">
+  {% for article in articles %}
+    <div class="col-md-4 mb-4">
+      <div class="post-card">
+        {% if article.pk in saved_ids %}
+          <span class="saved-badge saved-badge-card">Saved</span>
+        {% endif %}
+        {% if article.images %}
+          <img src="{{ article.images.url }}" alt="{{ article.title }}">
+        {% endif %}
+        <div class="p-3">
+          <h6 class="text-dark">{{ article.title|truncatechars:60 }}</h6>
+          <p class="small para">{{ article.content|truncatechars:110 }}</p>
+          <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
         </div>
       </div>
-    {% empty %}
-      <p>No news in this category yet.</p>
-    {% endfor %}
-  </div>
+    </div>
+  {% empty %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-face-frown"></i></div>
+      <h3>No news in this category yet</h3>
+      <p>Try another category from the menu above.</p>
+    </div>
+  {% endfor %}
 </div>
 {% endblock %}
+
+

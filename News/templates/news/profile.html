@@ -1,0 +1,90 @@
+﻿{% extends 'news/base.html' %}
+{% block content %}
+<section class="page-hero">
+  <p class="page-eyebrow">Profile</p>
+  <h2>{{ request.user.get_full_name|default:request.user.username }}</h2>
+  <p class="page-sub">Manage your saved stories and profile settings.</p>
+</section>
+
+<section class="profile-settings">
+  <div class="profile-card profile-form-card">
+    <div class="profile-avatar">
+      {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="{{ request.user.username }}">
+      {% else %}
+        <div class="profile-avatar-fallback">
+          {{ request.user.username|first|upper }}
+        </div>
+      {% endif %}
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="profile-form">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-control" name="first_name" value="{{ request.user.first_name }}">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Last name</label>
+          <input type="text" class="form-control" name="last_name" value="{{ request.user.last_name }}">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" value="{{ request.user.email }}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" name="location" value="{{ profile.location }}" placeholder="City, Country">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Bio</label>
+        <textarea class="form-control" rows="4" name="bio" placeholder="Tell us about your interests...">{{ profile.bio }}</textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Avatar</label>
+        <input type="file" class="form-control" name="avatar" accept="image/*">
+      </div>
+      <button type="submit" class="btn btn-gradient">Save changes</button>
+    </form>
+  </div>
+</section>
+
+<section class="section-heading">
+  <div>
+    <h2>Saved stories</h2>
+    <p class="section-sub">Keep your reading list organized.</p>
+  </div>
+</section>
+
+<section class="profile-grid">
+  {% for saved in saved_articles %}
+    <article class="profile-card">
+      <div class="profile-card-meta">
+        <span>{{ saved.article.category }}</span>
+        <span>{{ saved.saved_at|date:"M d, Y" }}</span>
+      </div>
+      <h3>{{ saved.article.title }}</h3>
+      <p>{{ saved.article.content|truncatechars:130 }}</p>
+      <div class="profile-card-actions">
+        <a href="{% url 'article_detail' saved.article.pk %}" class="btn btn-gradient">Read</a>
+        <form method="post" action="{% url 'toggle_save_article' saved.article.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="btn btn-outline-dark">Remove</button>
+        </form>
+      </div>
+    </article>
+  {% empty %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-bookmark"></i></div>
+      <h3>No saved stories</h3>
+      <p>Save articles to build your personal reading list.</p>
+      <a href="{% url 'home' %}" class="btn btn-gradient">Browse news</a>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}
+
+

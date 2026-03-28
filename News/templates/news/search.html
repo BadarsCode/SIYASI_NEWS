@@ -1,18 +1,35 @@
-{% include 'base.html' %}
+﻿{% extends 'news/base.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h3>Search results for: "{{ query }}"</h3>
-    <hr>
+<section class="search-hero">
+  <div class="search-hero-content">
+    <p class="search-eyebrow">Search</p>
+    <h2 class="search-title">Results for "{{ query|default_if_none:"" }}"</h2>
+    <p class="search-meta">{{ results|length }} result(s)</p>
+  </div>
+</section>
 
-    {% for item in results %}
-        <div class="mb-3">
-            <h4>{{ item.title }}</h4>
-            <p>{{ item.content|truncatewords:25 }}</p>
-            <a class="btn btn-primary btn-sm" href="{% url 'news_detail' item.slug %}">Read More</a>
-        </div>
-    {% empty %}
-        <p>No matching results found.</p>
-    {% endfor %}
-</div>
-
+<section class="search-results">
+  {% for item in results %}
+    <article class="result-card">
+      <div class="result-meta">
+        <span class="result-category">{{ item.category }}</span>
+        <span class="result-date">{{ item.published_at|date:"M d, Y" }}</span>
+        {% if item.pk in saved_ids %}
+          <span class="saved-badge">Saved</span>
+        {% endif %}
+      </div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.content|truncatewords:28 }}</p>
+      <a class="btn result-btn" href="{% url 'article_detail' item.pk %}">Read Article</a>
+    </article>
+  {% empty %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="fa-regular fa-face-frown"></i></div>
+      <h3>No results found</h3>
+      <p>Try another keyword or browse categories above.</p>
+    </div>
+  {% endfor %}
+</section>
 {% endblock %}
+
+
