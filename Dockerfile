@@ -28,4 +28,3 @@ RUN chmod +x /app/entrypoint.sh
 EXPOSE 8080
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["sh", "-c", "gunicorn SIYASI_NEWS.wsgi:application --bind 0.0.0.0:${PORT:-8080}"]
