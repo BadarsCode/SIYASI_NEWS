@@ -21,10 +21,11 @@ COPY SIYASI_NEWS /app/SIYASI_NEWS
 COPY News /app/News
 COPY manage.py /app/manage.py
 COPY entrypoint.sh /app/entrypoint.sh
+COPY static /app/static
 
 RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 8080
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["sh", "-c", "gunicorn SIYASI_NEWS.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers ${GUNICORN_WORKERS:-3}"]
+CMD ["sh", "-c", "gunicorn SIYASI_NEWS.wsgi:application --bind 0.0.0.0:${PORT:-8080}"]
