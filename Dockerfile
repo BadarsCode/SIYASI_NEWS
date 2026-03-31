@@ -18,6 +18,7 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY SIYASI_NEWS /app/SIYASI_NEWS
+COPY News /app/News
 COPY manage.py /app/manage.py
 COPY entrypoint.sh /app/entrypoint.sh
 
@@ -26,4 +27,4 @@ RUN chmod +x /app/entrypoint.sh
 EXPOSE 8000
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["gunicorn", "SIYASI_NEWS.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+CMD ["sh", "-c", "gunicorn SIYASI_NEWS.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers ${GUNICORN_WORKERS:-3}"]
