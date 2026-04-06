@@ -1,4 +1,4 @@
-﻿FROM python:3.11-slim
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -20,11 +20,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY SIYASI_NEWS /app/SIYASI_NEWS
 COPY News /app/News
 COPY manage.py /app/manage.py
-COPY entrypoint.sh /app/entrypoint.sh
 COPY static /app/static
 
-RUN chmod +x /app/entrypoint.sh
+EXPOSE 8000
 
-EXPOSE 8080
-
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["/bin/sh", "-c", "PORT=${PORT:-8000}; python manage.py migrate --noinput && python manage.py collectstatic --noinput && exec gunicorn SIYASI_NEWS.wsgi:application --bind 0.0.0.0:${PORT} --workers 3"]
