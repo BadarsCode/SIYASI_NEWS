@@ -1,3 +1,12 @@
 env/
+venv/
 .env
-*.__pycach__
+.env.*
+__pycache__/
+*.py[cod]
+*.sqlite3
+media/
+news_images/
+staticfiles/
+Thumbs.db
+.DS_Store
