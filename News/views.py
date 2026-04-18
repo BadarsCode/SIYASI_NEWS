@@ -1,4 +1,4 @@
-﻿import re
+import re
 import json
 import google.generativeai as genai
 
@@ -339,24 +339,22 @@ class NewsArticleDetailAPI(generics.RetrieveUpdateDestroyAPIView):
 
 
 def Home(request):
-    articles = NewsArticle.objects.order_by("-published_at")[:5]
-    top_articles = NewsArticle.objects.order_by("-published_at")[:5]
-    breaking_news = NewsArticle.objects.order_by("-published_at")[:5]
-    all_articles = NewsArticle.objects.all().order_by("-published_at")
+    latest_five = list(NewsArticle.objects.order_by("-published_at")[:5])
+    all_articles = NewsArticle.objects.order_by("-published_at")[:20]
     categories = [cat[0] for cat in NewsArticle.categories]
     saved_ids = _get_saved_ids(request.user)
     return render(request, "news/home.html", {
-        "articles": articles,
-        "top_articles": top_articles,
+        "articles": latest_five,
+        "top_articles": latest_five,
         "all_articles": all_articles,
         "categories": categories,
-        "breaking_news": breaking_news,
+        "breaking_news": latest_five,
         "saved_ids": saved_ids,
     })
 
 
 def gallery(request):
-    articles = NewsArticle.objects.exclude(images="").order_by("-published_at")
+    articles = NewsArticle.objects.exclude(images="").exclude(images__isnull=True).order_by("-published_at")[:50]
     return render(request, "news/gallery.html", {"articles": articles})
 
 
@@ -374,9 +372,14 @@ def about_view(request):
 
 def contact_view(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        message = request.POST.get("message", "").strip()
+        
+        if not name or not email or not message:
+            messages.error(request, "All fields are required.")
+            return redirect("contact")
+            
         full_message = f"From: {name} < {email} >\n\n{message}"
         try:
             send_mail(
@@ -388,7 +391,7 @@ def contact_view(request):
             )
             messages.success(request, "Your message has been sent successfully!")
         except Exception as exc:
-            messages.error(request, f"An error occurred: {exc}")
+            messages.error(request, "We couldn't deliver the message. Please check server email configurations.")
         return redirect("contact")
     return render(request, "news/contact.html")
 
@@ -551,7 +554,7 @@ def search(request):
     if query:
         results = NewsArticle.objects.filter(
             models.Q(title__icontains=query) | models.Q(content__icontains=query)
-        ).order_by("-published_at")
+        ).order_by("-published_at")[:50]
     else:
         results = NewsArticle.objects.none()
     saved_ids = _get_saved_ids(request.user)

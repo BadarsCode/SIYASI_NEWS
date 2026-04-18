@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg: #f6f1eb;
   --bg-2: #eef3f8;
   --ink: #0f172a;
@@ -1143,6 +1143,11 @@ h1, h2, h3, h4, .navbar-brand {
   .article-content {
     padding: 18px;
   }
+}
+
+.navbar {
+  position: relative;
+  z-index: 1050;
 }
 
 

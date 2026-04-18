@@ -1,4 +1,4 @@
-﻿{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +18,11 @@
   <meta property="og:url" content="{{ request.build_absolute_uri }}">
   <meta property="og:title" content="Siyasi News - Latest Breaking News">
   <meta property="og:description" content="Get the latest political, sports, technology, and entertainment updates on Siyasi News.">
-  <meta property="og:image" content="{% if articles and articles.0.images %}{{ articles.0.images.url }}{% endif %}">
+  {% if article and article.images %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.images.url }}">
+  {% elif articles and articles.0.images %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ articles.0.images.url }}">
+  {% endif %}
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Siyasi News - Trusted Source for the Latest Headlines">
