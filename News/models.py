@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from tinymce.models import HTMLField
 
 class NewsArticle(models.Model):
     categories = [
@@ -30,7 +30,7 @@ class NewsArticle(models.Model):
         ("Other", "Other"),
     ]
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = HTMLField()
     images = models.ImageField(upload_to="news_images/", blank=True, null=True)
     published_at = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=50, choices=categories, default="Other")
