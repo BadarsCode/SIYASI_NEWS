@@ -193,7 +193,7 @@ GEN_API_KEY = os.getenv('GEN_API_KEY')
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUDE_NAME': os.getenv('CLOUDINARY_NAME'),
+    'CLOUDINARY_CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
