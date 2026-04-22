@@ -10,3 +10,4 @@ news_images/
 staticfiles/
 Thumbs.db
 .DS_Store
+db.sqlite3
