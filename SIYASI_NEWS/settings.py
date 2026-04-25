@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'News',
     'rest_framework',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -62,6 +61,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     'tinymce',
+    'django.contrib.sites',
 ]
 
 SITE_ID = 1
