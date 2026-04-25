@@ -46,7 +46,7 @@
               {% endif %}
             </div>
             <h1>{{ lead.title }}</h1>
-            <p>{{ lead.content|truncatechars:180 }}</p>
+            <p>{{ lead.content|truncatechars:180|safe }}</p>
             <a href="{% url 'article_detail' lead.pk %}" class="btn hero-btn">Read story</a>
           </div>
         </article>
@@ -65,7 +65,7 @@
         {% for article in top_articles %}
           <a href="{% url 'article_detail' article.pk %}" class="hero-list-item">
             <span class="hero-list-meta">{{ article.category }} | {{ article.published_at|date:"M d" }}</span>
-            <span class="hero-list-title">{{ article.title|truncatechars:80 }}</span>
+            <span class="hero-list-title">{{ article.title|truncatechars:80|safe }}</span>
           </a>
         {% empty %}
           <p class="text-muted">No top stories yet.</p>
@@ -105,10 +105,10 @@
             <span class="hero-category">{{ article.category }}</span>
             <span class="hero-date">{{ article.published_at|date:"M d, Y" }}</span>
           </div>
-          <h6 class="text-dark">{{ article.title|truncatechars:60 }}</h6>
-          <p class="small para">{{ article.content|truncatechars:110 }}</p>
+          <h6 class="text-dark">{{ article.title|striptags|truncatechars:60 }}</h6>
+          <p class="small para">{{ article.content|striptags|truncatechars:110 }}</p>
           <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary btn-gradient">Read More</a>
-        </div>
+        </div>:
       </article>
     </div>
   {% empty %}
